@@ -1,0 +1,175 @@
+.Main {
+  text-align: center;
+}
+
+.Main-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Main-logo {
+    animation: Main-logo-spin infinite 20s linear;
+  }
+}
+
+.Main-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Main-link {
+  color: #61dafb;
+}
+
+@keyframes Main-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.center1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: '300px'
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: '300px';
+    gap: 30px;
+}
+
+.reaction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: '300px'
+}
+
+.circlepicker{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: '300px';
+    gap: 30px;
+}
+
+
+.circle-picker {
+  div[title="#ffffff"] {
+    border: 1px solid #999;
+  }
+  &.white-selected {
+    div[title="#ffffff"] {
+      box-shadow: #999 0 0 0 3px inset !important;
+      border: none;
+      &:focus {
+        box-shadow: #999 0 0 0 3px inset, 0 0 5px #999 !important;
+      }
+    }
+  }
+
+  div[title="#colorless"] {
+    border: 0px solid #999;
+    font-size: 1em;
+    content: "";
+    z-index: -1;
+  }
+  div[title="#colorless"]:after {
+    border: 0px solid #999;
+    content: "INC";
+    font-size: 1em;
+    z-index: -1;
+  }
+  &.colorless-selected {
+    div[title="#colorless"] {
+      border: none;
+      text-decoration-line: underline;
+      text-decoration-color: #999;
+      color: #999;
+    }
+  }
+
+  div[title="#noppt"] {
+    border: 0px solid #999;
+    font-size: 1em;
+    content: "";
+    z-index: -1;
+  }
+  div[title="#noppt"]:after {
+    border: 0px solid #999;
+    content: "SIN PPT";
+    font-size: 1em;
+    z-index: -1;
+  }
+  &.noppt-selected {
+    div[title="#noppt"] {
+      border: none;
+      text-decoration-line: underline;
+      text-decoration-color: #999;
+      color: #999;
+    }
+  }
+}
+
+/* CSS */
+.button {
+  background-color: #e1ecf4;
+  border-radius: 3px;
+  border: 1px solid #7aa7c7;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #39739d;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.button:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+
+
