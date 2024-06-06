@@ -556,7 +556,7 @@ const cpro = {
   },
 };
 
-const rr = {
+const rrs = {
   //cr3+
   'cr3+': {
     'ho-': {
@@ -1380,4 +1380,4 @@ const rr = {
 
 
 
-export {cations, crea, cpro, rr};
+export {cations, crea, cpro, rrs};
