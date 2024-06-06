@@ -24,6 +24,9 @@ function ColorPicker(props) {
         circleColors.splice(index, 1);
     }
   };
+  
+  
+  
 //  console.log('circleColors: ', circleColors); 
   const defColor = whitecolor;
   const [color, setColor] = useState(defColor);
@@ -61,16 +64,6 @@ function ColorPicker(props) {
       color: '#000000',
   };
 
-  const blocks = {
-    [whitecolor]: defBlock,
-    [colorless]: defBlock,
-    [noppt]: defBlock,
-    "default": defBlock,
-    "color": {
-      backgroundColor: `${color}`,
-      border: "2px solid " + `${color}`,
-    },
-  };
 
   const blackhex = {
     "PPT": noppt,
@@ -78,9 +71,21 @@ function ColorPicker(props) {
   };
 
   const blockStyle = (color) => {
+    const blocks = {
+      [whitecolor]: defBlock,
+      [colorless]: defBlock,
+      [noppt]: defBlock,
+      "default": defBlock,
+      "color": {
+        backgroundColor: color,
+        border: "2px solid " + color,
+      },
+    };
+    console.log('blockStyle: ', color);
 //    console.log('blocks: ', blocks);
 //    console.log('blockStyle: ', `blocks[${color}]: ${blocks[color]}`);
     //color === whitecolor ? blocks['white'] : (color === colorless ? blocks['colorless'] : blocks['color'])}
+    console.log(props.name, color ? (blocks[color] ? blocks[color] : blocks["color"]) : blocks["default"]);
     return (color ? (blocks[color] ? blocks[color] : blocks["color"]) : blocks["default"]);
   };
   

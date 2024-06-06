@@ -73,7 +73,7 @@ class Reapro extends React.Component {
 //    const options = Object.keys(this.source).map((x) => ({value: x, label: this.rpltx(x)}));
 //    this.getOptions();
 //    const value = this.props.options.find((x) => x.value === this.props.value);
-    var value = this.props.value;
+    var value = this.props.valuex;
     console.log('value: ', value);
 //    console.log('render: ', this.props.value, value);
 //    console.log(this.props.values.length > 0 ? this.ltx(this.source[this.props.values[0]]['ltx']));

@@ -9,8 +9,6 @@ import ColorPicker from "./ColorPicker.js";
 import { colors, noppt } from "./colors.js";
 import Button from "react-bootstrap/Button";
 
-console.log(rrs);
-
 const config = {
   tex: {
     loader: { load: ['[tex]/html'] },
@@ -26,9 +24,7 @@ const config = {
   }
 };
 
-//      <MathJax>{"\\(\\frac{10}{4x} \\approx 2^{12}\\)"}</MathJax>
-
-let re = '{{{Cr}^{3+}}_{(ac)}}';
+const allParams = ["ion", "rea", "rea2", "rea3", "pro", "pro2", "pro3", "ppt", "sol"];
 
 class Main extends React.Component {
   constructor(props) {
@@ -45,29 +41,7 @@ class Main extends React.Component {
   }
 
   getInitialState = () => {
-    const [reas, rea2s, rea3s, pros, pro2s, pro3s] = this.getAll2();
-    return {
-      //ca: new Reapro({source: ions, callback: this.setReapro2}),
-      ion: null,
-      rea: null,
-      rea2: null,
-      rea3: null,
-      pro: null,
-      pro2: null,
-      pro3: null,
-      reaction: false,
-      mjrr: null,
-      ppt: null,
-      sol: null,
-      ions: cations,
-      irea: reas,
-      irea2: rea2s,
-      irea3: rea3s,
-      ipro: pros,
-      ipro2: pro2s,
-      ipro3: pro2s,
-      reset: false,
-    };
+    return (this.getNewState(false));
   }
   
   showReapro2 = (x) => {
@@ -129,36 +103,6 @@ class Main extends React.Component {
     );
   }
 
-  debug = () => {
-    if (!(this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea])) {
-      console.log('debug: false');
-      return;
-    }
-    console.log('debug');
-    const rrcare = rrs[this.state.ion][this.state.rea];
-    const vars = [
-    ["this.state.ion", this.state.ion],
-    ["this.state.rea", this.state.rea],
-    ["rrcare", rrcare],
-    ["rrcare.rea2", rrcare.rea2],
-    ["this.state.rea2", this.state.rea2],
-    ["rrcare.rea3", rrcare.rea3],
-    ["this.state.rea3", this.state.rea3],
-    ["rrcare.pro", rrcare.pro],
-    ["this.state.pro", this.state.pro],
-    ["rrcare.pro2", rrcare.pro2],
-    ["this.state.pro2", this.state.pro2],
-    ["rrcare.pro3", rrcare.pro3],
-    ["this.state.pro3", this.state.pro3],
-    ["rrcare.ppt", rrcare.ppt],
-    ["this.state.ppt", this.state.ppt],
-    ["[ipro[this.state.pro][color]", (this.state.pro ? this.state.ipro[this.state.pro]["color"] : null)],
-    ["colors[ipro[this.state.pro][color]", (this.state.pro ? colors[this.state.ipro[this.state.pro]["color"]] : null)],
-    ];
-    vars.forEach(([key, value]) => {console.log(`${key}: `, value)});
-  }
-    
-
   reaction = () => {
 //    this.reset();
 //    return;
@@ -170,9 +114,9 @@ class Main extends React.Component {
         && ((!rrcare.rea3 && !this.state.rea3) || (rrcare.rea3 && this.state.rea3 && rrcare.rea3 === this.state.rea3))
         && ((!rrcare.pro2 && !this.state.pro2) || (rrcare.pro2 && this.state.pro2 && rrcare.pro2 === this.state.pro2))
         && ((!rrcare.pro3 && !this.state.pro3) || (rrcare.pro3 && this.state.pro3 && rrcare.pro3 === this.state.pro3))
-        && ((!rrcare.ppt && this.state.ppt === noppt)
-          || (rrcare.ppt && this.state.ppt && colors[this.state.ipro[this.state.pro]["color"]].includes(this.state.ppt)))
-        && (!rrcare.sol || (rrcare.sol && colors[rrcare["sol"]].includes(this.state.sol)))
+        && ((!rrcare.ppt && this.state.pptcolor === noppt)
+          || (rrcare.ppt && this.state.pptcolor && colors[this.state.ipro[this.state.pro]["color"]].includes(this.state.pptcolor)))
+        && (!rrcare.sol || (rrcare.sol && colors[rrcare["sol"]].includes(this.state.solcolor)))
       );
       const mjrr = (reaction ? this.makeMjrr() : null);
       //const mjrr = this.ltx('{{{Mn}^{2+}}_{(ac)}}');
@@ -187,21 +131,9 @@ class Main extends React.Component {
   return;
   }
 
-  randomx = (source) => {
-    const rdm = Math.floor(Math.random() * source.length);
-//    Object.keys(this.source)[]
-  }
-
-  randomxxx = (max) => {
-    const fixing = 3;
-    const des = Math.floor(Math.random() * fixing);
-    if (des === 0) {
-      return this.randomxx(this.state.ions);
-    } else if (des === 1) {
-      return this.randomxx(this.state.irea);
-    } else {
-      return this.randomxx(this.state.ipro);
-    }
+  getRandomFrom = (arr, x) => {
+    console.log('GRF: ', {arr}, {x});
+    return (arr[Math.floor(Math.random() * arr.length)]);
   }
   
   getReas = (ion) => {
@@ -247,6 +179,47 @@ class Main extends React.Component {
 //  console.log('getAll: ', reas, rea2s, rea3s, pros, pro2s, pro3s);
   return [reas, rea2s, rea3s, pros, pro2s, pro3s];
   }
+  
+  getPPT = (ion, rea, source) => {
+    if (ion && rea && rrs[ion][rea]) {
+      if (rrs[ion][rea].ppt) {
+        return source[rrs[ion][rea].pro].color;
+      }
+    }
+    return false;
+  }
+
+  getSOL = (ion, rea, source) => {
+    if (ion && rea && rrs[ion][rea]) {
+      return rrs[ion][rea].sol;
+    }
+    return null;
+  }
+
+  getRandomSubArr = (arr, sublength) => {
+    const ret = arr;
+    const length = ret.length;
+    [...Array(length - sublength)].forEach((x) => {
+      const index = Math.floor(Math.random() * ret.length);
+      ret.splice(index, 1);
+    });
+    return ret;
+  };
+
+  getParams = (rr) => {
+    // rr = {ion, rea, ...ionrea, ppt};
+    const ret = Object.keys(rr);
+    let index = ret.indexOf("coef");
+    if (index > -1) {
+      ret.splice(index, 1);
+    }
+    index = ret.indexOf("sol");
+    if (index > -1 && !rr["sol"]) {
+      ret.splice(index, 1);
+    }
+    console.log(ret);
+    return (ret);
+  }
 
   getAll2 = (rand) => {
 //    const ions = [];
@@ -256,7 +229,7 @@ class Main extends React.Component {
     const pros = [];
     const pro2s = [];
     const pro3s = [];
-    const reactions = [];
+    let reactions = [];
     
     for (let ion in rrs) {
 //      this.iifnot(ion, ions);
@@ -266,32 +239,32 @@ class Main extends React.Component {
 //        console.log('ionrea = rrs[ion][rea]: ', rrs[ion][rea]);
         //reaction = ionrea
         const ionrea = rrs[ion][rea];
-        reactions.push({ion: ion, rea: rea, ionrea: ionrea});
+        if (cations[ion]) {
+          reactions.push({ion: ion, rea: rea, ...ionrea, ppt: this.getPPT(ion, rea, cpro),});
+        }
       }
     }
     
     if (rand) {
-      const length = reactions.length;
-      [...Array(length - rand)].forEach((x) => {
-        const index = Math.floor(Math.random() * reactions.length);
-        reactions.splice(index, 1);
-      });
+      reactions = this.getRandomSubArr(reactions, rand);
     }
     
     console.log('reactions: ', reactions);
     
-    reactions.forEach(({ion, rea, ionrea}) => {
+    reactions.forEach((rr) => {
 //      this.iifnot(rea, reas);
 //      this.iifnot(ionrea["rea2"], rea2s);
 //      this.iifnot(ionrea["rea3"], rea3s);
 //      this.iifnot(ionrea["pro"], pros);
 //      this.iifnot(ionrea["pro2"], pro2s);
 //      this.iifnot(ionrea["pro3"], pro3s);
-      [[rea, reas], [ionrea["rea2"], rea2s], [ionrea["rea3"], rea3s], [ionrea["pro"], pros], [ionrea["pro2"], pro2s], [ionrea["pro3"], pro3s]]
+      [[rr["rea"], reas], [rr["rea2"], rea2s], [rr["rea3"], rea3s], [rr["pro"], pros], [rr["pro2"], pro2s], [rr["pro3"], pro3s]]
       .forEach(([rp, addToArr]) => {
         this.iifnot(rp, addToArr);
       });
     });
+
+    const chosenrr = this.getRandomFrom(reactions);
       
     const [irea, irea2, irea3, ipro, ipro2, ipro3] = [{}, {}, {}, {}, {}, {}];
 //  [irea, irea2, irea3, ipro, ipro2, ipro3]
@@ -303,9 +276,82 @@ class Main extends React.Component {
       }
     });
 
+    const rrparams = this.getParams(chosenrr);
+    const numParams = Math.floor(rrparams.length/2) + 1; //(allParams.length/2 % 2);
+    const selectedParams = this.getRandomSubArr(rrparams, numParams);
+    console.log('subarr: ', selectedParams);
+    const canSelect = {};
+    allParams.forEach((x) => {
+      canSelect[x] = !selectedParams.includes(x);
+    });
+    
+    console.log({chosenrr}, {canSelect});
+
+//    const [pptcolor, solcolor] = [...["ppt", "sol"].map((x) => (!canSelect[x] ? this.getRandomFrom(colors[chosenrr[x]], 1) : null))];
+    
+    const pptcolor = (!canSelect["ppt"] ? (chosenrr["ppt"] ? this.getRandomFrom(colors[chosenrr["ppt"]]) : noppt) : null);
+    const solcolor = (!canSelect["sol"] ? this.getRandomFrom(colors[chosenrr["sol"]]) : null);
+
 //    console.log('getAllRea2: ', reas, rea2s, rea3s, pros, pro2s, pro3s);
 //    console.log('getAllRea2: ', irea, irea2, irea3, ipro, ipro2, ipro3);
-    return [irea, irea2, irea3, ipro, ipro2, ipro3];
+    return [irea, irea2, irea3, ipro, ipro2, ipro3, chosenrr, canSelect, pptcolor, solcolor];
+  }
+
+  getNewState = (reset) => {
+    const numReactions = 11;
+//    [this.ca, this.re, this.pro, this.rea2, this.rea3, this.pro2, this.pro3] = [null, null, null, null, null, null, null];
+//    console.log("rea: ", this.state.rea);
+//    this.setState({});
+    const [reas, rea2s, rea3s, pros, pro2s, pro3s, chosenrr, canSelect, pptcolor, solcolor] = this.getAll2(numReactions);
+    //la desicion es: si hay algun reactivo o producto preseleccionado que identifique una reaccion de amoniaco
+    //entonces todos los repros estan visibles por defecto.
+    const params = {};
+    allParams.forEach((x) => {
+      params[x] = (!canSelect[x] ? chosenrr[x] : null);
+    });
+
+//    console.log([reas, rea2s, rea3s, pros, pro2s, pro3s, chosenrr]);
+    console.log('newState: ');
+    console.log({chosenrr}, {canSelect}, {params}, {pptcolor}, {solcolor});
+    return {
+      //ca: new Reapro({source: ions, callback: this.setReapro2}),
+      /*
+      ion: null,
+      rea: null,
+      rea2: null,
+      rea3: null,
+      pro: null,
+      pro2: null,
+      pro3: null,
+      ppt: null,
+      sol: null,
+      */
+      ...params,
+      reaction: false,
+      mjrr: null,
+      ions: cations,
+      irea: reas,
+      irea2: rea2s,
+      irea3: rea3s,
+      ipro: pros,
+      ipro2: pro2s,
+      ipro3: pro2s,
+      reset: reset,
+      chosenrr: chosenrr,
+      canSelect: canSelect,
+      pptcolor: pptcolor,
+      solcolor: solcolor,
+    };
+  }
+
+  reset = () => {
+    const newState = this.getNewState(!this.state.reset);
+    this.setState({
+      ...newState,
+      reset: !this.state.reset,
+    });
+    
+//    this.setState({irea: reas, irea2: rea2s, irea3: rea3s, ipro: pros, ipro2: pro2s, ipro3: pro3s});
   }
 
   test = () => {
@@ -313,36 +359,34 @@ class Main extends React.Component {
 //    const am = ["ion", "rea", "pro", "rea2", "rea3", "pro2", "pro3"].map((x) => this.state[x]);
 //    console.log(am, am.reduce((a, x) => a + (x && x !== true ? 1 : 0), 0));
   }
-  
-  reset = () => {
-    const ions = cations;
-    const irea = crea;
-    const ipro = cpro;
-    
-    const rnca = this.randomx(ions);
 
-    this.setState({
-      ion: null,
-      rea: null,
-      pro: null,
-      rea2: null,
-      rea3: null,
-      pro2: null,
-      pro3: null,
-      ppt: null,
-      sol: null,
-//      ions: ions,
-//      irea: ire,
-//      ipro: ipro,
-      reset: !this.state.reset,
-    });
-//    [this.ca, this.re, this.pro, this.rea2, this.rea3, this.pro2, this.pro3] = [null, null, null, null, null, null, null];
-//    console.log("rea: ", this.state.rea);
-//    this.setState({});
-    const [reas, rea2s, rea3s, pros, pro2s, pro3s] = this.getAll2(20);
-    console.log('here');
-    console.log([reas, rea2s, rea3s, pros, pro2s, pro3s]);
-    this.setState({irea: reas, irea2: rea2s, irea3: rea3s, ipro: pros, ipro2: pro2s, ipro3: pro3s});
+  debug = () => {
+    if (!(this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea])) {
+      console.log('debug: false');
+      return;
+    }
+    console.log('debug');
+    const rrcare = rrs[this.state.ion][this.state.rea];
+    const vars = [
+    ["this.state.ion", this.state.ion],
+    ["this.state.rea", this.state.rea],
+    ["rrcare", rrcare],
+    ["rrcare.rea2", rrcare.rea2],
+    ["this.state.rea2", this.state.rea2],
+    ["rrcare.rea3", rrcare.rea3],
+    ["this.state.rea3", this.state.rea3],
+    ["rrcare.pro", rrcare.pro],
+    ["this.state.pro", this.state.pro],
+    ["rrcare.pro2", rrcare.pro2],
+    ["this.state.pro2", this.state.pro2],
+    ["rrcare.pro3", rrcare.pro3],
+    ["this.state.pro3", this.state.pro3],
+    ["rrcare.ppt", rrcare.ppt],
+    ["this.state.ppt", this.state.ppt],
+    ["[ipro[this.state.pro][color]", (this.state.pro ? this.state.ipro[this.state.pro]["color"] : null)],
+    ["colors[ipro[this.state.pro][color]", (this.state.pro ? colors[this.state.ipro[this.state.pro]["color"]] : null)],
+    ];
+    vars.forEach(([key, value]) => {console.log(`${key}: `, value)});
   }
   
   setion = (x) => {
@@ -378,12 +422,12 @@ class Main extends React.Component {
 
   setPPT = (color) => {
     console.log("setPPT: ", color);
-    this.setState({ppt: color});
+    this.setState({pptcolor: color});
   }
 
   setSOL = (color) => {
     console.log("setSOL: ", color);
-    this.setState({sol: color});
+    this.setState({solcolor: color});
   }
   
   reaproAmount = () => {
@@ -403,11 +447,25 @@ class Main extends React.Component {
       return (ltx(source[x]['ltx']));
     }
     const reapro = (x, setx, source) => {
+      if (!this.state.canSelect[x]) {
+        return rpltx(this.state[x], source);
+      }
       const options = Object.keys(source).map((xx) => ({value: xx, label: rpltx(xx, source)}));
+//      const value = (this.state[x] ? options.find(({value, label}) => value === this.state[x]) : null);
+//      const valuex = (this.state[x] ? {"value": this.state[x], "label": ltx(this.state[x])} : null);
+      if (false && this.state[x]) {
+        console.log('x: ', x);
+        console.log('state[x]: ', this.state[x]);
+        console.log('source: ', source);
+        console.log('options: ', options);
+//        console.log('reapro: value: ', valuex);
+      }
+//      return (ltx(this.state[x]));
       return (
         <Reapro
 //          value={options.find((x) => x.value === this.state[x])}
           key={x + this.state.reset}
+//          valuex={valuex}
           source={source}
           callback={setx}
 //          options={Object.keys(source).map((x) => ({value: x, label: rpltx(x, source)}))}
@@ -417,10 +475,10 @@ class Main extends React.Component {
     };
     const plus = (x, setx, source) => {
       return (
-        this.showReapro2(x) ?
+        this.showReapro2(x) || !this.state.canSelect[x] ?
           <div className="reaction">
             {this.ltx("~ + ~")}
-            {reapro(x, setx, source)}
+            {!this.state.canSelect[x] ? rpltx(this.state[x], source) : reapro(x, setx, source)}
           </div>
         : null
       );
@@ -442,13 +500,13 @@ class Main extends React.Component {
         <ColorPicker
           name={'PPT'}
           callback={(color) => this.setPPT(color)}
-          color={this.state.ppt}
+          color={this.state.pptcolor}
         />
         {this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea] && rrs[this.state.ion][this.state.rea]["sol"]
         ? <ColorPicker
             name={'SOL'}
             callback={(color) => this.setSOL(color)}
-            color={this.state.sol}
+            color={this.state.solcolor}
           />
         : null}
         <Window
