@@ -332,8 +332,6 @@ class Main extends React.Component {
       ...newState,
       reset: !this.state.reset,
     });
-    
-//    this.setState({irea: reas, irea2: rea2s, irea3: rea3s, ipro: pros, ipro2: pro2s, ipro3: pro3s});
   }
 
   test = () => {
