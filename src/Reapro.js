@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-dropdown-select";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
-import { cations, crea, cpro, rrs } from "./reactions.js";
+import { MathJax } from "better-react-mathjax";
+//import { cations, crea, cpro, rrs } from "./reactions.js";
 import "./Main.css";
 
 class Reapro extends React.Component {

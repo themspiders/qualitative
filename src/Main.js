@@ -1,8 +1,7 @@
 import "./Main.css";
-import React, { useState } from "react";
+import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import { cations, crea, cpro, rrs } from "./reactions.js";
-import Select from "react-dropdown-select";
 import Reapro from "./Reapro.js";
 import Window from "./Window.js";
 import ColorPicker from "./ColorPicker.js";
@@ -329,7 +328,7 @@ class Main extends React.Component {
       irea3: rea3s,
       ipro: pros,
       ipro2: pro2s,
-      ipro3: pro2s,
+      ipro3: pro3s,
       reset: reset,
       chosenrr: chosenrr,
       canSelect: canSelect,

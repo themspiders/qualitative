@@ -477,10 +477,6 @@ const cpro = {
     ltx: '{{Pb}_{(s)}}',
     color: 'blanco',
   },
-  'zn2+': {
-    ltx: '{{{Zn}^{2+}}_{(ac)}}',
-    color: 'incoloro',
-  },
   'pbcro4': {
     ltx: '{{PbCrO_{4}}_{(s)}}',
     color: 'amarillo',
@@ -1056,8 +1052,6 @@ const rrs = {
       sol: 'incoloro',
       coef: {'zn(oh)2': 1, 'ho-': 2, '[zn(oh)4]2-': 1},
     },
-  },
-  'zn(oh)2': {
     'nh3': {
       pro: '[zn(nh3)4]2+',
       ppt: false,
@@ -1075,12 +1069,12 @@ const rrs = {
       pro2: 'h2o',
       coef: {'ag+': 2, 'ho-': 2, 'ag2o': 1, 'h2o': 1},
     },
-    'ho-': {
+    'ho-exc': {
       pro: 'ag2o',
       ppt: true,
       sol: 'marron',
       pro2: 'h2o',
-      coef: {'ag+': 2, 'ho-': 2, 'ag2o': 1, 'h2o': 1},
+      coef: {'ag+': 2, 'ho-exc': 2, 'ag2o': 1, 'h2o': 1},
     },
     'nh3': {
       pro: 'ag2o',
@@ -1332,13 +1326,13 @@ const rrs = {
       pro2: 'nh4+',
       coef: {'al3+': 1, 'nh3': 3, 'h2o': 3, 'al(oh)3': 1, 'nh4+': 3},
     },
-    'nh3': {
+    'nh3exc': {
       pro: 'al(oh)3',
       ppt: true,
       sol: 'blanco',
       rea2: 'h2o',
       pro2: 'nh4+',
-      coef: {'al3+': 1, 'nh3': 3, 'h2o': 3, 'al(oh)3': 1, 'nh4+': 3},
+      coef: {'al3+': 1, 'nh3exc': 3, 'h2o': 3, 'al(oh)3': 1, 'nh4+': 3},
     },
   },
   'al(oh)3': {
