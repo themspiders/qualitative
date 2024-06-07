@@ -354,11 +354,12 @@ class Main extends React.Component {
   }
 
   debug = () => {
+    console.log('debug', this.state.chosenrr);
+    return;
     if (!(this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea])) {
       console.log('debug: false');
       return;
     }
-    console.log('debug');
     const rrcare = rrs[this.state.ion][this.state.rea];
     const vars = [
     ["this.state.ion", this.state.ion],
@@ -507,7 +508,7 @@ class Main extends React.Component {
             disabled={!this.state.canSelect.ppt}
           />
           : null}
-          {true || ( this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea] && rrs[this.state.ion][this.state.rea]["sol"])
+          {(this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea] && rrs[this.state.ion][this.state.rea]["sol"])
           ? <ColorPicker
               key={"SOL" + this.state.reset}
               name={"SOL"}
@@ -539,11 +540,11 @@ class Main extends React.Component {
 
     const rrButton = () => {
       return (
-        <div className="buttons">
+        <div className="rrButton">
           <Window
             name={'Reacción'}
             onClick={() => this.reaction()}
-            secondary={true || !this.state.reaction}
+            secondary={!this.state.reaction}
             title={this.state.reaction}
             callback={() => this.reset()}
             mjrr={this.state.mjrr}
@@ -563,7 +564,7 @@ class Main extends React.Component {
           : null}
           {true
           ? <Button onClick={() => this.test()}>
-              test
+              reset
             </Button>
           : null}
         </div>
@@ -571,16 +572,18 @@ class Main extends React.Component {
     }
 
     return (
+      <div>
       <MathJaxContext version={3} config={config}>
       <div className="center">
         <div className="allreaction">
           {reaction()}
           {rrButton()}
         </div>
-        {debugButtons()}
         {pptsol()}
       </div>
       </MathJaxContext>
+      {debugButtons()}
+      </div>
     );
   }
 }

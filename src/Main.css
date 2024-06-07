@@ -107,12 +107,24 @@
   gap: 30px;
 }
 
-.buttons {
+.buttons1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
   gap: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  gap: 30px;
+  bottom: 0;
+  margin-left: 5%;
+  margin-bottom: 5%;
 }
 
 .colorpicker {
