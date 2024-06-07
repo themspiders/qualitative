@@ -1,33 +1,18 @@
-const model = {
-  '': {
-    color: '',
-    'ho-': {
-      sol: '',
-      ppt: '',
-      pro: '',
+const rrModel = {
+  'ion': {
+    'rea': {//main reagent
+      'pro': "main product",
+      'ppt': "if precipitates",
+      'sol': "solution color",
+      'rea2': "second reagent",
+      'rea3': "third reagent",
+      'pro2': "second product",
+      'pro3': "third product",
+      'coef': "reaction coefficients",
     },
-    'ho-exc': {
-      sol: '',
-      ppt: '',
-      pro: '',
-    },
-    'h2o2': {
-      sol: '',
-      ppt: '',
-      pro: '',
-    },
-    'nh3': {
-      sol: '',
-      ppt: '',
-      pro: '',
-    },
-    'nh3exc': {
-      sol: '',
-      ppt: '',
-      pro: '',
-    },
-  },
+  }, //ion + rea + rea2 + rea3 <-> pro + pro2 + pro3
 };
+
 
 const cations = {
   'cr3+': {
@@ -89,7 +74,6 @@ const crea = {
     ltx: '{{H_{2}O}_{(l)}}',
   },
   'ho-': {
-  
     ltx: '{{{HO}^{-}}_{(ac)}}',
   },
   'ho-exc': {
@@ -250,7 +234,7 @@ const cpro = {
   },
   'mnso4': {
     ltx: '{{MnSO_{4}}_{(s)}}',
-    color: 'rosa_palido',
+    color: 'rosado',
   },
   //fe2+
   'fe(oh)2': {
@@ -735,11 +719,11 @@ const rrs = {
       pro2: 'nh4+',
       coef: {'fe2+': 1, 'nh3exc': 2, 'h2o': 3, 'fe(oh)2': 1, 'nh4+': 2},
     },
-    'dmg': {
+    'dmg(alc)': {
       pro: '[fe(dmg)2]2+',
       ppt: false,
       sol: 'rojo',
-      coef: {'fe2+': 1, 'dmg': 1, '[fe(dmg)2]2+': 1},
+      coef: {'fe2+': 1, 'dmg(alc)': 1, '[fe(dmg)2]2+': 1},
     },
     'cn-': {
       pro: 'fe(cn)2',
@@ -860,7 +844,9 @@ const rrs = {
       pro: 'co(oh)2',
       ppt: true,
       sol: 'azul',
-      coef: {'co2+': 1, 'nh3': 4, 'h2o': 4, 'co(oh)2': 2, 'nh4+': 4},
+      rea2: 'h2o',
+      pro2: 'nh4+',
+      coef: {'co2+': 1, 'nh3': 2, 'h2o': 2, 'co(oh)2': 1, 'nh4+': 2},
     },
     'nh3exc': {
       pro: '[co(nh3)6]2+',
@@ -879,14 +865,14 @@ const rrs = {
     'o2': {
       pro: 'co(oh)3',
       ppt: true,
-      sol: 'pardo',
+      sol: 'negro',
       rea2: 'h2o',
       coef: {'co(oh)2': 4, 'o2': 1, 'h2o': 2, 'co(oh)3': 4},
     },
     'h2o2': {
       pro: 'co(oh)3',
       ppt: true,
-      sol: 'pardo',
+      sol: 'negro',
       coef: {'co(oh)2': 2, 'h2o2': 1, 'co(oh)3': 2},
     },
   },
@@ -897,6 +883,14 @@ const rrs = {
       sol: 'rojo',
       pro2: 'ho-',
       coef: {'[co(nh3)6]2+': 2, 'h2o2': 1, '[co(nh3)6]3+': 2, 'ho-': 2},
+    },
+    'o2': {
+      pro: '[co(nh3)6]3+',
+      ppt: false,
+      sol: 'rojo',
+      rea2: 'h2o',
+      pro2: 'ho-',
+      coef: {'[co(nh3)6]2+': 4, 'o2': 1, 'h2o': 2, '[co(nh3)6]3+': 4, 'ho-': 4},
     },
   },
   //ni2+
@@ -979,7 +973,7 @@ const rrs = {
       pro2: 'i2',
       coef: {'cu2+': 1, 'i-': 4, 'cui': 2, 'i2': 1},
     },
-    'dmg': {
+    'dmg(alc)': {
       pro: '[cu(dmg)2]2+',
       ppt: false,
       sol: 'verde',
@@ -1274,21 +1268,23 @@ const rrs = {
     },
     'ho-exc': {
       pro: '[sn(oh)4]2-',
-      ppt: true,
-      sol: 'blanco',
+      ppt: false,
+      sol: 'incoloro',
       coef: {'sn2+': 1, 'ho-exc': 4, '[sn(oh)4]2-': 1},
     },
     'nh3': {
       pro: 'sn(oh)2',
       ppt: true,
       sol: 'blanco',
+      rea2: 'h2o',
+      pro2: 'nh4+',
       coef: {'sn2+': 1, 'nh3': 2, 'h2o': 2, 'sn(oh)2': 1, 'nh4+': 2},
     },
     'nh3exc': {
-      pro: 'sn(oh)2',
-      ppt: true,
-      sol: 'blanco',
-      coef: {'sn2+': 1, 'nh3exc': 2, 'h2o': 2, 'sn(oh)2': 1, 'nh4+': 2},
+      pro: '[sn(oh)4]2-',
+      ppt: false,
+      sol: 'incoloro',
+      coef: {'sn2+': 1, 'nh3exc': 4, 'h2o': 4, '[sn(oh)4]2-': 1, 'nh4+': 4},
     },
     's2-': {
       pro: 'sns',

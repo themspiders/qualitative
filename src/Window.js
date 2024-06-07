@@ -36,6 +36,7 @@ function Window(props) {
         {props.mjrr ?
           <Modal.Body>
             <h4>{'Reacción balanceada:'}</h4>
+            <br></br>
             {props.mjrr}
           </Modal.Body>
         : null}

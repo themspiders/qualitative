@@ -37,42 +37,103 @@
   }
 }
 
-.center1{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    width: '300px'
+.center1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: '300px'
 }
 
-.center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: '300px';
-    gap: 30px;
+.center1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: '300px';
+  gap: 30px;
 }
 
-.reaction{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: '300px'
+.circlepicker1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  width: '300px';
+  gap: 30px;
 }
 
-.circlepicker{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: '300px';
-    gap: 30px;
+.reaction1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: '300px';
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  margin: auto;
+  top: 30%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.allreaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.reaction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.pptsol {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.colorpicker {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.circlepicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 10vh;
+  gap: 10px;
+/*  margin-top: 10%; */
+}
 
 .circle-picker {
+  width: 70px !important;
   div[title="#ffffff"] {
     border: 1px solid #999;
   }
@@ -129,7 +190,16 @@
   }
 }
 
-/* CSS */
+.btn-primary {
+  opacity: 0.8 !important;
+  &.default:hover {
+    border: 1px solid #222, !important;
+    opacity: 1.0 !important;
+  }&.select {
+    color: #999 !important;
+  }
+}
+
 .button {
   background-color: #e1ecf4;
   border-radius: 3px;
