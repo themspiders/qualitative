@@ -11,20 +11,8 @@ class Reapro extends React.Component {
     this.canSelect = true;
     this.source = (this.props.source ? this.props.source : {});
     this.callback = (this.props.callback ? this.props.callback : (() => {}));
-//    this.values = (this.props.values ? this.tovl(this.props.values) : []);
-//    console.log('values: ', this.values);
     this.options = Object.keys(this.source).map((x) => ({value: x, label: this.rpltx(x)}));
-//    this.options = [];
-//    this.state = {
-//      values1: this.props.values1,
-//    };
   }
-
-//  componentDidUpdate(prevProps) {
-//    if(prevProps.values1 !== this.props.values1) { 
-//      this.setState({values1: this.props.values1});
-//    }
-//  }
 
   setReapro(select) {
     console.log('select: ', select);
@@ -42,17 +30,9 @@ class Reapro extends React.Component {
   }
   
   rpltx(x) {
-//    console.log('rpltx: ', x);
     return (this.ltx(this.source[x]['ltx']));
   }
 
-  tovl(arr) {
-    console.log('arr: ', arr);
-    const y = arr.map(x => ({value: x, label: this.ltx(this.source[x]['ltx'])}));
-    console.log('y: ', y);
-    return y;
-  }    
-  
   dropdown(options) {
     return (
       <Select id={'cr3+'} options={options} values={this.values} onChange={(select) => this.setReapro(select)} />
@@ -69,16 +49,8 @@ class Reapro extends React.Component {
   }
 
   render() {
-//    console.log(this.options);
-//    const options = Object.keys(this.source).map((x) => ({value: x, label: this.rpltx(x)}));
-//    this.getOptions();
-//    const value = this.props.options.find((x) => x.value === this.props.value);
     var value = this.props.valuex;
-    console.log('value: ', value);
-//    console.log('render: ', this.props.value, value);
-//    console.log(this.props.values.length > 0 ? this.ltx(this.source[this.props.values[0]]['ltx']));
-//this.ltx(this.source[this.props.values[0]]['ltx'])
-//    const ltx = this.ltx(this.source[this.props.values[0]]['ltx']);
+//    console.log('value: ', value);
 
     return (
       <Select 

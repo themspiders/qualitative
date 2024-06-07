@@ -5,8 +5,6 @@ import Button from "react-bootstrap/Button";
 import { colors, whitecolor, colorless, noppt, getNamesFromColor, doColorName, doColorNames } from "./colors.js";
 
 function ColorPicker(props) {
-//  const circleColors = [].concat.apply([], Object.keys(colors).map((x) => colors[x]));
-//  const [title, setTitle] = useState(props.name);
   const containsSet = (x, y) => {
     return y.every((e) => {
         return x.includes(e)
@@ -25,7 +23,6 @@ function ColorPicker(props) {
     }
   };
   
-//  console.log('circleColors: ', circleColors); 
   const defColor = whitecolor;
   const [color, setColor] = useState(defColor);
   const [show, setShow] = useState(false);
@@ -59,8 +56,6 @@ function ColorPicker(props) {
   }
 
   const onChange = (color) => {
-//    console.log('onChange: color: ', color);
-//    console.log('onChange: prop: ', props.prop);
     if (!props.disabled) {
       setColor(color);
       props.callback(color);

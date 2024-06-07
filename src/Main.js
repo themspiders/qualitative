@@ -29,9 +29,6 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.sol = null;
-//    console.log(Object.keys(rrs));
-    //const x = Object.keys(rrs);
-//    this.options = Object.keys(rrs).map(x => ({value: x, label: this.rpltx(x)}));
     this.state = this.getInitialState();
   }
 
@@ -54,7 +51,6 @@ class Main extends React.Component {
 
   ltx = (x, source, coef) => {
     let ret = (source ? (source[x] && source[x]['ltx']) : x)
-//    const coef = (setCoef && source[x] && source[x]['
     if (coef && coef > 1) {
       ret = `{${coef} ~ ${ret}}`;
     }
@@ -140,7 +136,6 @@ class Main extends React.Component {
   }
 
   getAll = () => {
-//    const ions = [];
     const reas = {};
     const rea2s = {};
     const rea3s = {};
@@ -149,25 +144,18 @@ class Main extends React.Component {
     const pro3s = {};
     
     for (let ion in rrs) {
-//      this.iifnot(ion, ions);
-//      console.log('ion: ', ion);
       for (let rea in rrs[ion]) {
-//        console.log('rea: ', rea);
-//        console.log('ionrea = rrs[ion][rea]: ', rrs[ion][rea]);
         reas[rea] = crea[rea];
         const ionrea = rrs[ion][rea];
         [["rea2", rea2s], ["rea3", rea3s], ["pro2", pro2s], ["pro3", pro3s]].forEach(([key, s]) => {
           if (ionrea[key] && !s[ionrea[key]]) {
             s[ionrea[key]] = (key[0] === "r" ? crea[ionrea[key]] : cpro[ionrea[key]]);
             if (!s[ionrea[key]]) {
-//              console.log('s: ', s, 'ionrea: ', ionrea, 'ionrea[key]: ', ionrea[key]);
             }
           }
         });
       }
     }
-        console.log('pross: ', pros);
-//  console.log('getAll: ', reas, rea2s, rea3s, pros, pro2s, pro3s);
   return [reas, rea2s, rea3s, pros, pro2s, pro3s];
   }
   
@@ -338,6 +326,7 @@ class Main extends React.Component {
   }
 
   reset = () => {
+    console.log('reset: ');
     const newState = this.getNewState(!this.state.reset);
     this.setState({
       ...newState,
@@ -354,7 +343,7 @@ class Main extends React.Component {
   }
 
   debug = () => {
-    console.log('debug', this.state.chosenrr);
+    console.log('debug: ', this.state.chosenrr);
     return;
     if (!(this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea])) {
       console.log('debug: false');
