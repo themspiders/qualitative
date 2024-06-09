@@ -13,8 +13,7 @@ const rrModel = {
   }, //ion + rea + rea2 + rea3 <-> pro + pro2 + pro3
 };
 
-
-const cations = {
+const rrssrc = {
   'cr3+': {
     color: 'verde',
     ltx: '{{{Cr}^{3+}}_{(ac)}}',
@@ -28,7 +27,7 @@ const cations = {
     ltx: '{{{Fe}^{2+}}_{(ac)}}',
   },
   'fe3+': {
-    color: 'incoloro',
+    color: 'amarillo',
     ltx: '{{{Fe}^{3+}}_{(ac)}}',
   },
   'co2+': {
@@ -67,9 +66,6 @@ const cations = {
     color: 'incoloro',
     ltx: '{{{Al}^{3+}}_{(ac)}}',
   },
-};
-
-const crea = {
   'h2o': {
     ltx: '{{H_{2}O}_{(l)}}',
   },
@@ -87,6 +83,7 @@ const crea = {
   },
   'h2o2': {
     ltx: '{{H_{2}O_{2}}_{(ac)}}',
+    color: 'h2o2',
   },
   'nh3': {
     ltx: '{{NH_{3}}_{(ac)}}',
@@ -96,9 +93,11 @@ const crea = {
   },
   's2-': {
     ltx: '{{S^{2-}}_{(ac)}}',
+    color: 'incoloro',
   },
   'so42-': {
     ltx: '{{{SO_{4}}^{2-}}_{(ac)}}',
+    color: 'incoloro',
   },
   'dmg': {
     ltx: '{DMG}',
@@ -120,6 +119,7 @@ const crea = {
   //cu2+
   'i-': {
     ltx: '{{I^{-}}_{(ac}}',
+    color: 'incoloro',
   },
   'zn': {
     ltx: '{{Zn}_{(s)}}',
@@ -140,12 +140,15 @@ const crea = {
   },
   'br-': {
     ltx: '{{{Br}^{-}}_{(ac)}}',
+    color: 'incoloro',
   },
   'aso43-': {
     ltx: '{{{AsO_{4}}^{3-}}_{(ac)}}',
+    color: 'incoloro',
   },
   'cro42-': {
     ltx: '{{{CrO_{4}}^{-}}_{(ac)}}',
+    color: 'amarillo',
   },
   //mg2+
   'hpo42-': {
@@ -167,13 +170,18 @@ const crea = {
   },
   'i3-': {
     ltx: '{{{I_{3}}^{-}}_{(ac)}}',
+    color: 'pardo',
+  },
+  'amilosa': {
+    ltx: '{amilosa_{(almidón)}}',
+  },
+  '[i2-amilosa]': {
+    ltx: '{{[{I_{2}}-amilosa]}_{(ac)}}',
+    color: 'azul',
   },
   'no3-': {
     ltx: '{{{NO_{3}}^{-}}_{(ac)}}',
   },
-};
-
-const cpro = {
   'h2o': {
     ltx: '{{H_{2}O}_{(l)}}',
     color: 'incoloro',
@@ -349,6 +357,10 @@ const cpro = {
     ltx: '{{CuI}_{(s)}}',
     color: 'blanco',
   },
+  'cui2': {
+    ltx: '{{CuI_{2}}_{(s)}}',
+    color: 'amarillo',
+  },
   'i2': {
     ltx: '{{I_{2}}_{(l)}}',
     color: null,
@@ -522,7 +534,7 @@ const cpro = {
     ltx: '{{{Al{(OH)}_{3}}}_{(s)}}',
     color: 'blanco',
   },
-  'al(oh)4-': {
+  '[al(oh)4-]': {
     ltx: '{{{{Al{(OH)}_{4}}}^{-}}_{(s)}}',
     color: 'incoloro',
   },
@@ -530,13 +542,194 @@ const cpro = {
     ltx: '{{{Cl}^{-}}_{(ac)}}',
     color: 'incoloro',
   },
-  'ho-': {
-    ltx: '{{{HO}^{-}}_{(ac)}}',
+  'co32-': {
+    ltx: '{{{CO_{3}}^{2-}}_{(ac)}}',
     color: 'incoloro',
+  },
+  'po43-': {
+    ltx: '{{{PO_{4}}^{3-}}_{(ac)}}',
+    color: 'incoloro',
+  },
+  'alpo4-': {
+    ltx: '{{AlPO_{4}}_{(s)}}',
+    color: 'blanco',
+  },
+  'ba2+': {
+    ltx: '{{{Ba}^{2+}}_{(ac)}}',
+  },
+  'ca2+': {
+    ltx: '{{{Ca}^{2+}}_{(ac)}}',
+  },
+  'co2': {
+    ltx: '{{CO_{2}}_{(g)}}',
+  },
+  'ag2co3': {
+    ltx: '{{{Ag}_{2}CO_{3}}_{(s)}}',
+    color: 'blanco',
+  },
+  'baco3': {
+    ltx: '{{BaCO_{3}}_{(s)}}',
+    color: 'blanco',
+  },
+  'caco3': {
+    ltx: '{{CaCO_{3}}_{(s)}}',
+    color: 'blanco',
+  },
+  'po43-': {
+    ltx: '{{{PO_{4}}^{3-}}_{(ac)}}',
+    color: 'incoloro',
+  },
+  'ag3po4': {
+    ltx: '{{{Ag}_{3}PO_{4}}_{(s)}}',
+    color: 'amarillo',
+  },
+  'alpo4': {
+    ltx: '{{AlPO_{4}}_{(s)}}',
+    color: 'blanco',
+  },
+  'al(oh)3': {
+    ltx: '{{Al{(OH)}_{3}}_{(s)}}',
+    color: 'blanco',
+  },
+  'h2po4-': {
+    ltx: '{{{H_{2}PO_{4}}^{-}}_{(ac)}}',
+    color: 'incoloro',
+  },
+  'no2': {
+    ltx: '{{NO_{2}}_{(g)}}',
+    color: 'pardo',
+  },
+  'agno2': {
+    ltx: '{{AgNO_{2}}_{(s)}}',
+    color: 'blanco',
+  },
+  'agno3': {
+    ltx: '{{AgNO_{3}}_{(s)}}',
+    color: 'blanco',
+  },
+  'no2-': {
+    ltx: '{{{NO_{2}}^{-}}_{(ac)}}',
+    color: 'incoloro',
+  },
+  'hno2': {
+    ltx: '{{HNO_{2}}_{(ac)}}',
+    color: 'azul',
+  },
+  'no': {
+    ltx: '{{NO}_{(g)}}',
+    color: 'incoloro',
+  },
+  'ba3(po4)2': {
+    ltx: '{{{Ba}_{3}{(PO_{4})}_{2}}_{(s)}}',
+    color: 'blanco',
+  },
+  'ba3(aso4)2': {
+    ltx: '{{{Ba}_{3}{(AsO_{4})}_{2}}_{(s)}}',
+    color: 'blanco',
+  },
+  'ca3(po4)2': {
+    ltx: '{{{Ca}_{3}{(PO_{4})}_{2}}_{(s)}}',
+    color: 'blanco',
+  },
+  'ca3(aso4)2': {
+    ltx: '{{{Ca}_{3}{(AsO_{4})}_{2}}_{(s)}}',
+    color: 'blanco',
+  },
+  'ag3aso4': {
+    ltx: '{{{Ag}_{3}AsO_{4}}_{(s)}}',
+    color: 'pardo',
+  },
+  'mno4-': {
+    ltx: '{{{MnO_{4}}^{-}}_{(ac)}}',
+    color: 'violeta',
+  },
+  'cr2o72-': {
+    ltx: '{{{{Cr}_{2}O_{7}}^{2-}}_{(ac)}}',
+    color: 'naranja',
+  },
+  'bacro4': {
+    ltx: '{{BaCrO_{4}}_{(s)}}',
+    color: 'amarillo',
+  },
+  'ag2cro4': {
+    ltx: '{{{Ag}_{2}CrO_{4}}_{(s)}}',
+    color: 'rojo',
+  },
+  'pbcro4': {
+    ltx: '{{PbCrO_{4}}_{(s)}}',
+    color: 'amarillo',
+  },
+  's2o32-': {
+    ltx: '{{{S_{2}O_{3}}^{2-}}_{(ac)}}',
+    color: 'incoloro',
+  },
+  's': {
+    ltx: '{S_{(s)}}',
+    color: 'amarillo',
+  },
+  'so2': {
+    ltx: '{{SO_{2}}_{(g)}}',
+    color: 'incoloro',
+  },
+  'ag2s2o3': {
+    ltx: '{{{Ag}_{2}S_{2}O_{3}}_{(s)}}',
+    color: 'blanco',
+  },
+  'bas2o3': {
+    ltx: '{{BaS_{2}O_{3}}_{(s)}}',
+    color: 'blanco',
+  },
+  's4o62-': {
+    ltx: '{{{S_{4}O_{6}}^{2-}}_{(ac)}}',
+    color: 'incoloro',
+  },
+  'so32-': {
+    ltx: '{{{SO_{3}}^{2-}}_{(ac)}}',
+    color: 'incoloro',
+  },
+  'hso3-': {
+    ltx: '{{{HSO_{4}}^{-}}_{(ac)}}',
+    color: 'incoloro',
+  },
+  'ag2so3': {
+    ltx: '{{{Ag}_{2}SO_{3}}_{(s)}}',
+    color: 'blanco',
+  },
+  'baso3': {
+    ltx: '{{{BaSO_{3}}_{(s)}}',
+    color: 'blanco',
+  },
+  'ag2so4': {
+    ltx: '{{{Ag}_{2}SO_{4}}_{(s)}}',
+    color: 'blanco',
+  },
+  'baso4': {
+    ltx: '{{BaSO_{4}}_{(s)}}',
+    color: 'blanco',
+  },
+  'pbso4': {
+    ltx: '{{PbSO_{4}}_{(s)}}',
+    color: 'blanco',
+  },
+  'cuso4': {
+    ltx: '{{CuSO_{4}}_{(ac)}}',
+    color: 'azul',
+  },
+  '[ag(s2o3)2]3-': {
+    ltx: '{{{[Ag{(S_{2}O_{3})}_{2}]}^{3-}}_{(ac)}}',
+    color: 'incoloro',
+  },
+  'bacr2o72-': {
+    ltx: '{{{Ba{Cr}_{2}O_{7}}^{2-}}_{(ac)}}',
+    color: 'naranja',
+  },
+  'hso4-': {
+    ltx: '{{{HSO_{4}}^{-}}_{(ac)}}',
+    color: 'incoloro'
   },
 };
 
-const rrs = {
+const cationrrs = {
   //cr3+
   'cr3+': {
     'ho-': {
@@ -948,6 +1141,12 @@ const rrs = {
       sol: 'celeste',
       coef: {'cu2+': 1, 'ho-': 2, 'cu(oh)2': 1},
     },
+    'ho-exc': {
+      pro: 'cu(oh)2',
+      ppt: true,
+      sol: 'celeste',
+      coef: {'cu2+': 1, 'ho-': 2, 'cu(oh)2': 1},
+    },
     'nh3': {
       pro: 'cu(oh)2',
       ppt: true,
@@ -1178,12 +1377,12 @@ const rrs = {
       pro2: 'nh4+',
       coef: {'mg2+': 1, 'nh3exc': 2, 'h2o': 2, 'mg(oh)2': 1, 'nh4+': 2},
     },
-    'hpo42-': {
+    'po43-': {
       pro: 'mgnh4po4',
       ppt: true,
       sol: 'blanco',
-      rea2: 'nh3',
-      coef: {'mg2+': 1, 'hpo42-': 1, 'nh3': 1, 'mgnh4po4': 1},
+      rea2: 'nh4+',
+      coef: {'mg2+': 1, 'po43-': 1, 'nh4+': 1, 'mgnh4po4': 1},
     },
   },
   //pb2+
@@ -1313,10 +1512,10 @@ const rrs = {
       coef: {'al3+': 1, 'ho-': 3, 'al(oh)3': 1}
     },
     'ho-exc': {
-      pro: 'al(oh)4-',
+      pro: '[al(oh)4-]',
       ppt: false,
       sol: 'incoloro',
-      coef: {'al3+': 1, 'ho-exc': 4, 'al(oh)4-': 1},
+      coef: {'al3+': 1, 'ho-exc': 4, '[al(oh)4-]': 1},
     },
     'nh3': {
       pro: 'al(oh)3',
@@ -1337,10 +1536,10 @@ const rrs = {
   },
   'al(oh)3': {
     'ho-exc': {
-      pro: 'al(oh)4-',
+      pro: '[al(oh)4-]',
       ppt: false,
       sol: 'incoloro',
-      coef: {'al(oh)3': 1, 'ho-exc': 1, 'al(oh)4-': 1},
+      coef: {'al(oh)3': 1, 'ho-exc': 1, '[al(oh)4-]': 1},
     },
     'h+exc': {
       pro: 'al3+',
@@ -1352,22 +1551,525 @@ const rrs = {
   },
 };
 
+const anionrrs = {
+  //co32-
+  'co32-': {
+    'h+': {
+      pro: 'co2',
+      ppt: false,
+      sol: 'incoloro',
+//      gas: 'co2',
+      pro2: 'h2o',
+      coef: {'cro32-': 1, 'h+': 2, 'co2': 1, 'h2o': 1},
+     },
+    'ho-': {// ??
+      pro: 'co2',
+      ppt: false,
+      sol: 'incoloro',
+//      gas: 'co2',
+      coef: {'cro32-': 1, 'ho-': 1, 'co2': 1},
+     },
+    'ag+': {
+      pro: 'ag2co3',
+      ppt: true,
+      sol: null,
+      coef: {'co32-': 1, 'ag+': 2, 'ag2co3': 1},
+    },
+    'ba2+': {
+      pro: 'baco3',
+      ppt: true,
+      sol: null,
+      coef: {'co32-': 1, 'ba2+': 1, 'baco3': 1},
+    },
+    'ca2+': {
+      pro: 'caco3',
+      ppt: true,
+      sol: null,
+      coef: {'co32-': 1, 'ba2+': 1, 'caco3': 1},
+    },
+  },
+  //po43-
+  'po43-': {
+    'ag+': {
+      pro: 'ag3po4',
+      ppt: true,
+      sol: null,
+      coef: {'po43-': 1, 'ag+': 3, 'ag3po4': 1},
+    },
+    'ba2+': {
+      pro: 'ba3(po4)2',
+      ppt: true,
+      sol: null,
+      coef: {'po43-': 2, 'ba2+': 3, 'ba3(po4)2': 1},
+    },
+    'ca2+': {
+      pro: 'ca3(po4)2',
+      ppt: true,
+      sol: null,
+      coef: {'po43-': 2, 'ca2+': 3, 'ca3(po4)2': 1},
+    },
+    'al3+': {
+      pro: 'alpo4',
+      ppt: true,
+      sol: null,
+      coef: {'po43-': 1, 'al3+': 1, 'alpo4': 1},
+    },
+    'nh4+': {
+      pro: 'mgnh4po4',
+      ppt: true,
+      sol: null,
+      rea2: 'mg2+',
+      coef: {'po43-': 1, 'nh4+': 1, 'mg2+': 1, 'mgnh4po4': 1},
+    },
+  },
+  'alpo4': {
+    'ho-': {
+      pro: 'al(oh)3',
+      ppt: true,
+      sol: null,
+      pro2: 'po43-',
+      coef: {'alpo4': 1, 'ho-': 3, 'al(oh)3': 1, 'po43-': 1},
+    },
+    'h+': {
+      pro: 'al3+',
+      ppt: false,
+      sol: 'incoloro',
+      pro2: 'h2po4-',
+      coef: {'alpo4': 1, 'h+': 2, 'al3+': 1, 'h2p4o-': 1},
+    },
+  },
+  'mgnh4po4': {
+    'h+': {
+      pro: 'mg2+',
+      ppt: false,
+      sol: 'incoloro',
+      pro2: 'nh4+',
+      pro3: 'h2po4-',
+      coef: {'mgnh4po4': 1, 'h+': 2, 'mg2+': 1, 'nh4+': 1, 'h2po4-': 1},
+    },
+  },
+  //no3-
+  'no3-': {
+    'cu': {
+      pro: 'cu2+',
+      ppt: false,
+      sol: 'celeste',
+      rea2: 'h+',
+      pro2: 'no',
+      pro3: 'h2o',
+//      gas: 'no2',
+      coef: {'no3-': 2, 'cu': 3, 'h+': 8, 'cu2+': 3, 'no': 2, 'h2o': 4},
+    },
+    'ag+': {
+      pro: 'agno3',
+      ppt: true,
+      sol: null,
+      coef: {'no3-': 1, 'ag+': 1, 'agno3': 1},
+    },
+  },
+  //no2-
+  'no2-': {
+    'h+': {
+      pro: 'hno2',
+      ppt: false,
+      sol: 'azul',
+      coef: {'no2-': 1, 'h+': 1, 'hno2': 1},
+    },
+  },
+  'hno2': {
+    'calor': {
+      pro: 'no2',
+      ppt: false,
+      sol: null,
+      pro2: 'no',
+      pro3: 'h2o',
+//      gas: 'no2',
+      coef: {'hno2': 2, 'calor': 1, 'no2': 1, 'no': 1, 'h2o': 1}
+    },
+  },
+  //aso43-
+  'aso43-': {
+    'ag+': {
+      pro: 'ag3aso4',
+      ppt: true,
+      sol: null,
+      coef: {'aso43-': 1, 'ag+': 3, 'ag3aso4': 1},
+    },
+    'ba2+': {
+      pro: 'ba3(aso4)2',
+      ppt: true,
+      sol: null,
+      coef: {'aso43-': 2, 'ba2+': 3, 'ba3(aso4)2': 1},
+    },
+    'ca2+': {
+      pro: 'ca3(aso4)2',
+      ppt: true,
+      sol: null,
+      coef: {'aso43-': 2, 'ca2+': 3, 'ca3(aso4)2': 1},
+    },
+    'al3+': {
+      pro: 'X',
+    },
+    'nh4+': {
+      pro: 'mgnh4po4',
+      ppt: true,
+      sol: null,
+      rea2: 'mg2+',
+      coef: {'aso43-': 1, 'nh4+': 1, 'mg2+': 1, 'mgnh4aso4': 1},
+    },
+  },
+  //mno4-
+  'mno4-': {
+    'h+': {
+      pro: 'mn2+',
+      ppt: false,
+      sol: 'rosado',
+      coef: {'mno4-': 1, 'h+': 1, 'mn2+': 1},
+    },
+    'ho-': {
+      pro: 'mno2',
+      ppt: true,
+      sol: null,
+      coef: {'mno4-': 1, 'ho-': 1, 'mno2': 1},
+    },
+    'i-': {
+      pro: 'i3-',
+      ppt: false,
+      sol: 'pardo',
+      rea2: 'h+',
+      pro2: 'mn2+',
+      pro3: 'h2o',
+      coef: {'mno4-': 2, 'h+': 16, 'i-': 15, 'mn2+': 2, 'i3-': 5, 'h2o': 8},
+    },
+    'fe(oh)2': {
+      pro: 'mno2',
+      ppt: true,
+      sol: 'marron',
+      rea2: 'h2o',
+      pro2: 'fe(oh)3',
+      pro3: 'ho-',
+      coef: {'mno4-': 1, 'fe(oh)2': 3, 'h2o': 2, 'mno2': 1, 'fe(oh)3': 3, 'ho-': 1},
+    },
+  },
+  //cr2o72-
+  'cr2o72-': {
+    'ho-': {
+      pro: 'cro42-',
+      ppt: false,
+      sol: 'amarillo',
+      pro2: 'h2o',
+      coef: {'cr2o72-': 1, 'ho-': 2, 'cro42-': 2, 'h2o': 1},
+    },
+    'ba2+': {
+      pro: 'bacr2o72-',
+      ppt: false,
+      sol: 'naranja',
+      coef: {'cr2o72-': 1, 'ba2+': 1, 'bacr2o72-': 1},
+    },
+  },
+  //cro42-
+  'cro42-': {
+    'h+': {
+      pro: 'cr2o72-',
+      ppt: false,
+      sol: 'naranja',
+      pro2: 'h2o',
+      coef: {'cro42-': 2, 'h+': 2, 'cr2o72-': 1, 'h2o': 1},
+    },
+    'ba2+': {
+      pro: 'bacro4',
+      ppt: true,
+      sol: null,
+      coef: {'cro42-': 1, 'ba2+': 1, 'bacro4': 1},
+    },
+    'ag+': {
+      pro: 'ag2cro4',
+      ppt: true,
+      sol: null,
+      coef: {'cro42-': 1, 'ag+': 2, 'ag2cro4': 1},
+    },
+    'pb2+': {
+      pro: 'pbcro4',
+      ppt: true,
+      sol: null,
+      coef: {'cro42-': 1, 'pb2+': 1, 'pbcro4': 1},
+    },
+  },
+  'ag2cro4': {
+    'nh3': {
+      pro: '[ag(nh3)2]+',
+      ppt: false,
+      sol: 'amarillo',
+      pro2: 'cro42-',
+      coef: {'ag2cro4': 1, 'nh3': 4, '[ag(nh3)2]+': 2, 'cro42-': 1},
+    },
+  },
+  //s2-
+  's2-': {
+    'h+': {
+      pro: 'h2s',
+      ppt: false,
+      sol: null,
+//      gas: 'h2s',
+      coef: {'s2-': 1, 'h+': 2, 'h2s': 1},
+    },
+    'ag+': {
+      pro: 'ag2s',
+      ppt: true,
+      sol: null,
+      coef: {'s2-': 1, 'ag+': 2, 'ag2s': 1},
+    },
+    'mn2+': {
+      pro: 'mns',
+      ppt: true,
+      sol: null,
+      coef: {'s2-': 1, 'mn2+': 1, 'mns': 1},
+    },
+    'sn2+': {
+      pro: 'sns',
+      ppt: true,
+      sol: null,
+      coef: {'s2-': 1, 'sn2+': 1, 'sns': 1},
+    },
+    'pb2+': {
+      pro: 'pbs',
+      ppt: true,
+      sol: null,
+      coef: {'s2-': 1, 'pb2+': 1, 'pbs': 1},
+    },
+  },
+  'mns': {
+    'h+': {
+      pro: 'mn2+',
+      ppt: false,
+      sol: 'rosado',
+      pro2: 'h2s',
+//      gas: 'h2s',
+      coef: {'mns': 1, 'h+': 2, 'mn2+': 1, 'h2s': 1},
+    },
+  },
+  //s2o32-
+  's2o32-': {
+    'h+': {
+      pro: 's',
+      ppt: true,
+      sol: null,
+      pro2: 'so2',
+      pro3: 'h2o',
+      coef: {'s2o32-': 1, 'h+': 2, 's': 1, 'so2': 1, 'h2o': 1},
+    },
+    'ag+': {
+      pro: 'ag2s2o3',
+      ppt: true,
+      sol: null,
+      coef: {'s2o32-': 1, 'ag+': 2, 'ag2s2o3': 1},
+    },
+    'ba2+': {
+      pro: 'bas2o3',
+      ppt: true,
+      sol: null,
+      coef: {'s2o32-': 1, 'ba2+': 1, 'bas2o3': 1},
+    },
+    'i3-': {
+      pro: 's4o62-',
+      ppt: false,
+      sol: 'incoloro',
+      pro2: 'i-',
+      coef: {'s2o32-': 2, 'i3-': 1, 's4o62-': 1, 'i-': 3},
+    },
+  },
+  //so32-
+  'so32-': {
+    'h+': {
+      pro: 'hso4-',
+      ppt: false,
+      sol: 'incoloro',
+      coef: {'so32-': 1, 'h+': 1, 'hso4-': 1},
+    },
+    'ag+': {
+      pro: 'ag2so3',
+      ppt: true,
+      sol: null,
+      coef: {'so32-': 1, 'ag+': 2, 'ag2so3': 1},
+    },
+    'ba2+': {
+      pro: 'baso3',
+      ppt: true,
+      sol: null,
+      coef: {'so32-': 1, 'ba2+': 1, 'baso3': 1},
+    },
+    'mno4-': {
+      pro: 'so42-',
+      ppt: false,
+      sol: 'incoloro',
+      pro2: 'mn2+',
+      coef: {'so32-': 5, 'mno4-': 1, 'h+': 6, 'mn2+': 2, 'so42-': 5, 'h2o': 3},
+    },
+    'cr2o72-': {
+      pro: 'cr3+',
+      ppt: false,
+      sol: 'verde',
+      rea2: 'h+',
+      pro2: 'so42-',
+      pro3: 'h2o',
+      coef: {'so32-': 3, 'cr2o72-': 1, 'h+': 8, 'cr3+': 2, 'so42-': 3, 'h2o': 4},
+    },
+    'i3-': {
+      pro: 'i-',
+      ppt: false,
+      sol: 'incoloro',
+      pro2: 'so42-',
+      coef: {'so32-': 1, 'i3-': 1, 'h2o': 1, 'i-': 3, 'so42-': 1, 'h+': 2},
+    },
+  },
+  'baso3': {
+    'h+': {
+      pro: 'ba2+',
+      ppt: false,
+      sol: 'incoloro',
+      pro2: 'so2',
+//      gas: 'so2',
+      pro3: 'h2o',
+      coef: {'baso3': 1, 'h+': 2, 'ba2+': 1, 'so2': 1, 'h2o': 1},
+    },
+  },
+  //so42-
+  'so42-': {
+    'h+': {
+      pro: 'hso4-',
+      ppt: false,
+      sol: 'incoloro',
+      coef: {'so42-': 1, 'h+': 1, 'hso4-': 1},
+    },
+    'ag+': {
+      pro: 'ag2so4',
+      ppt: true,
+      sol: null,
+      coef: {'so42-': 1, 'ag+': 2, 'ag2so4': 1},
+    },
+    'ba2+': {
+      pro: 'baso4',
+      ppt: true,
+      sol: null,
+      coef: {'so42-': 1, 'ba2+': 1, 'baso4': 1},
+    },
+    'pb2+': {
+      pro: 'pbso4',
+      ppt: true,
+      sol: null,
+      coef: {'so42-': 1, 'pb2+': 1, 'pbso4': 1},
+    },
+    'cu2+': {
+      pro: 'cuso4',
+      ppt: false,
+      sol: 'azul',
+      coef: {'so42-': 1, 'cu2+': 1, 'cuso4': 1},
+    },
+  },
+  //i-
+  'i-': {
+    'ag+': {
+      pro: 'agi',
+      ppt: true,
+      sol: null,
+      coef: {'i-': 1, 'ag+': 1, 'agi': 1},
+    },
+    'mno4-': {
+      pro: 'i3-',
+      ppt: false,
+      sol: 'pardo',
+      rea2: 'h+',
+      pro2: 'mn2+',
+      pro3: 'h2o',
+      coef: {'mno4-': 2, 'h+': 16, 'i-': 15, 'mn2+': 2, 'i3-': 5, 'h2o': 8},
+    },
+    'cr2o72-': {
+      pro: 'i3-',
+      ppt: false,
+      sol: 'pardo',
+      rea2: 'h+',
+      pro2: 'cr3+',
+      pro3: 'h2o',
+      coef: {'i-': 9, 'cr2o72-': 1, 'h+': 14, 'i3-': 3, 'cr3+': 2, 'h2o': 7},
+    },
+    'h2o2': {
+      pro: 'i3-',
+      ppt: false,
+      sol: 'pardo',
+      rea2: 'h+',
+      pro2: 'h2o',
+      coef: {'i-': 3, 'h2o2': 1, 'h+': 2, 'i3-': 1, 'h2o': 1},
+    },
+    'pb2+': {
+      pro: 'pbi2',
+      ppt: true,
+      sol: null,
+      coef: {'i-': 2, 'pb2+': 1, 'pbi2': 1},
+    },
+    'cu2+': {
+      pro: 'cui2',
+      ppt: true,
+      sol: null,
+      coef: {'i-': 2, 'cu2+': 1, 'cui2': 1},
+    },
+  },
+  //i3-
+  'i3-': {
+    'amilosa': {
+      pro: '[i2-amilosa]',
+      ppt: false,
+      sol: 'azul',
+      pro2: 'i-',
+      coef: {'i3-': 1, 'amilosa': 1, '[i2-amilosa]': 1},
+    },
+    's2o32-': {
+      pro2: 'i-',
+      ppt: false,
+      sol: 'incoloro',
+      pro: 's4o62-',
+      coef: {'s2o32-': 2, 'i3-': 1, 's4o62-': 1, 'i-': 3},
+    },
+    'so32-': {
+      pro: 'i-',
+      ppt: false,
+      sol: 'incoloro',
+      pro2: 'so42-',
+      coef: {'so32-': 1, 'i3-': 1, 'h2o': 1, 'i-': 3, 'so42-': 1, 'h+': 2},
+    },
+  },
+  //cl-
+  'cl-': {
+    'ag+': {
+      pro: 'agcl',
+      ppt: true,
+      sol: null,
+      coef: {'cl-': 1, 'ag+': 1, 'agcl': 1},
+    },
+  },
+  //br-
+  'br-': {
+    'ag+': {
+      pro: 'agbr',
+      ppt: true,
+      sol: null,
+      coef: {'br-': 1, 'ag+': 1, 'agbr': 1},
+    },
+  },
+  'agbr': {
+    's2o32-': {
+      pro: '[ag(s2o3)2]3-',
+      ppt: false,
+      sol: 'incoloro',
+      coef: {'agbr': 1, 's2o32-': 2, '[ag(s2o3)2]3-': 1, 'br-': 1},
+    },
+  },
+};
 
 
 
+const rrs = {
+  ...cationrrs,
+  ...anionrrs,
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export {cations, crea, cpro, rrs};
+export { rrssrc, cationrrs, rrs };
