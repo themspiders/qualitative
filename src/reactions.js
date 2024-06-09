@@ -15,59 +15,56 @@ const rrModel = {
 
 const rrssrc = {
   'cr3+': {
-    color: 'verde',
     ltx: '{{{Cr}^{3+}}_{(ac)}}',
+    color: 'verde',
   },
   'mn2+': {
-    color: 'rosado',
     ltx: '{{{Mn}^{2+}}_{(ac)}}',
+    color: 'rosado',
   },
   'fe2+': {
-    color: 'verde',
     ltx: '{{{Fe}^{2+}}_{(ac)}}',
+    color: 'verde',
   },
   'fe3+': {
-    color: 'amarillo',
     ltx: '{{{Fe}^{3+}}_{(ac)}}',
+    color: 'amarillo',
   },
   'co2+': {
-    color: 'rosado',
     ltx: '{{{Co}^{2+}}_{(ac)}}',
+    color: 'rosado',
   },
   'ni2+': {
-    color: 'verde',
     ltx: '{{{Ni}^{2+}}_{(ac)}}',
+    color: 'verde',
   },
   'cu2+': {
-    color: 'celeste',
     ltx: '{{{Cu}^{2+}}_{(ac)}}',
+    color: 'celeste',
   },
   'zn2+': {
-    color: 'incoloro',
     ltx: '{{{Zn}^{2+}}_{(ac)}}',
+    color: 'incoloro',
   },
   'ag+': {
-    color: 'incoloro',
     ltx: '{{{Ag}^{+}}_{(ac)}}',
+    color: 'incoloro',
   },
   'mg2+': {
-    color: 'incoloro',
     ltx: '{{{Mg}^{2+}}_{(ac)}}',
+    color: 'incoloro',
   },
   'pb2+': {
-    color: 'incoloro',
     ltx: '{{{Pb}^{2+}}_{(ac)}}',
+    color: 'incoloro',
   },
   'sn2+': {
-    color: 'incoloro',
     ltx: '{{{Sn}^{2+}}_{(ac)}}',
+    color: 'incoloro',
   },
   'al3+': {
-    color: 'incoloro',
     ltx: '{{{Al}^{3+}}_{(ac)}}',
-  },
-  'h2o': {
-    ltx: '{{H_{2}O}_{(l)}}',
+    color: 'incoloro',
   },
   'ho-': {
     ltx: '{{{HO}^{-}}_{(ac)}}',
@@ -108,10 +105,6 @@ const rrssrc = {
   'cn-': {
     ltx: '{{CN}^{-}_{(ac)}}',
   },
-  //fe2+
-  '[fe(cn)6]3-': {
-    ltx: '{{{Fe{(CN)}_{6}}^{3-}}_{(ac)}}',
-  },
   //co2+
   'scn-': {
     ltx: '{{{SCN}^{-}}_{(ac)}}',
@@ -124,9 +117,6 @@ const rrssrc = {
   'zn': {
     ltx: '{{Zn}_{(s)}}',
   },
-  '[fe(cn)6]4-': {
-    ltx: '{{{[Fe{(CN)}_{6}]}^{4-}}_{(ac)}}',
-  },
   //zn2+
   '[fe(scn)6]4-': {
     ltx: '{{{[Fe{(SCN)}_{6}]}^{4-}}_{(ac)}}',
@@ -134,9 +124,6 @@ const rrssrc = {
   //ag+
   'aldehido': {
     ltx: '{aldehído}',
-  },
-  'cl-': {
-    ltx: '{{{Cl}^{-}}_{(ac)}}',
   },
   'br-': {
     ltx: '{{{Br}^{-}}_{(ac)}}',
@@ -179,9 +166,6 @@ const rrssrc = {
     ltx: '{{[{I_{2}}-amilosa]}_{(ac)}}',
     color: 'azul',
   },
-  'no3-': {
-    ltx: '{{{NO_{3}}^{-}}_{(ac)}}',
-  },
   'h2o': {
     ltx: '{{H_{2}O}_{(l)}}',
     color: 'incoloro',
@@ -206,10 +190,6 @@ const rrssrc = {
   'cro2-': {
     ltx: '{{{CrO_{2}}^{-}}_{(ac)}}',
     color: 'verde',
-  },
-  'cro42-': {
-    ltx: '{{{CrO_{4}}^{2-}}_{(ac)}}',
-    color: 'amarillo',
   },
   '[cr(nh3)6]3+': {
     ltx: '{{[Cr{(NH_{3})}_{6}]}_{(ac)}}',
@@ -374,10 +354,6 @@ const rrssrc = {
     ltx: '{{Cu}_{(s)}}',
     color: 'rojo',
   },
-  'zn2+': {
-    ltx: '{{{Zn}^{2+}}_{(ac)}}',
-    color: 'incoloro',
-  },
   'cu2[fe(cn)6]': {
     ltx: '{{Cu_{2}[Fe{(CN)}_{6}]}_{(s)}}',
     color: 'pardo',
@@ -441,14 +417,6 @@ const rrssrc = {
     ltx: '{{AgI}_{(s)}}',
     color: 'amarillo',
   },
-  'ag3aso4': {
-    ltx: '{{{Ag}_{3}AsO_{4}}_{(s)}}',
-    color: 'pardo',
-  },
-  'ag2cro4': {
-    ltx: '{{{Ag}_{2}CrO_{4}}_{(s)}}',
-    color: 'rojo',
-  },
   //mg2+
   'mg(oh)2': {
     ltx: '{{Mg{(OH)}_{2}}_{(s)}}',
@@ -489,10 +457,6 @@ const rrssrc = {
     ltx: '{{Pb}_{(s)}}',
     color: 'blanco',
   },
-  'pbcro4': {
-    ltx: '{{PbCrO_{4}}_{(s)}}',
-    color: 'amarillo',
-  },
   //sn2+
   'sn(oh)2': {
     ltx: '{{Sn{(OH)}_{2}}_{(s)}}',
@@ -519,16 +483,8 @@ const rrssrc = {
     ltx: '{{{Sn}^{4+}}_{(ac)}}',
     color: 'incoloro',
   },
-  'i-': {
-    ltx: '{{I^{-}}_{(ac)}}',
-    color: 'incoloro',
-  },
   'X': {
     ltx: '{X}',
-  },
-  'al3+': {
-    ltx: '{{{Al}^{3+}}_{(ac)}}',
-    color: 'incoloro',
   },
   'al(oh)3': {
     ltx: '{{{Al{(OH)}_{3}}}_{(s)}}',
@@ -575,20 +531,12 @@ const rrssrc = {
     ltx: '{{CaCO_{3}}_{(s)}}',
     color: 'blanco',
   },
-  'po43-': {
-    ltx: '{{{PO_{4}}^{3-}}_{(ac)}}',
-    color: 'incoloro',
-  },
   'ag3po4': {
     ltx: '{{{Ag}_{3}PO_{4}}_{(s)}}',
     color: 'amarillo',
   },
   'alpo4': {
     ltx: '{{AlPO_{4}}_{(s)}}',
-    color: 'blanco',
-  },
-  'al(oh)3': {
-    ltx: '{{Al{(OH)}_{3}}_{(s)}}',
     color: 'blanco',
   },
   'h2po4-': {
