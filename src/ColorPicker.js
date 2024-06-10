@@ -160,6 +160,7 @@ function ColorPicker(props) {
         options={options}
         onChange={(select) => onChange(select[0] ? select[0].value : null)}
         placeholder={placeHolder}
+        searchable={false}
       />
   );
 //        values={props.pptsolname ? [makeOption(props.pptsolname)] : []}

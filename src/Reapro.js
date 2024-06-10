@@ -56,6 +56,7 @@ class Reapro extends React.Component {
         onChange={(select) => this.setReapro(select)}
         values={value ? [value] : []}
         placeholder={"Seleccionar..."}
+        searchable={false}
       />
     );
   }
