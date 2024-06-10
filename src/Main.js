@@ -89,7 +89,7 @@ class Main extends React.Component {
       return <div></div>;
     }
     return (
-      <div style={{color: colors[!pptsol ? 'noppt' : pptsol]["default"]}}>
+      <div style={{"user-select": "none", "color": colors[!pptsol ? 'noppt' : pptsol]["default"]}}>
       {
       !key
         ? 'PPT ' + doColorName(!pptsol ? 'noppt' : pptsol)
@@ -161,10 +161,14 @@ class Main extends React.Component {
         rrState = this.makeRRFromState(this.getpptFromRR(rrcare), rrcare["sol"]);
         mjrr = this.makeMjrr(rrState);
         mjps = this.makeMjps(rrState);
-        this.setState({reaction: reaction, mjrr: mjrr, mjps: mjps, reaproAmountState: (reaction ? this.reaproAmount(rrState) : null)});
       }
-    } else {
-      this.setState({reaction: false, mjrr: null, mjps: null});
+      this.setState({
+        rrcount: this.state.rrcount + 1,
+        reaction: reaction,
+        mjrr: mjrr,
+        mjps: mjps,
+        reaproAmountState: (reaction ? this.reaproAmount(rrState) : null),
+      });
     }
   }
 
@@ -313,13 +317,14 @@ class Main extends React.Component {
     });
 
     const rrparams = this.getParams(chosenrr);
-    const numParams = Math.floor(rrparams.length/2) + 1; //(allParams.length/2 % 2);
+    const numParams = Math.floor(rrparams.length/2) + 2; //(allParams.length/2 % 2);
     const selectedParams = this.getRandomSubArr(rrparams, numParams);
 //    console.log('subarr: ', selectedParams);
     const canSelect = {};
     allParams.forEach((x) => {
       canSelect[x] = !selectedParams.includes(x);
     });
+    canSelect["ppt"] = true;
     
     console.log({chosenrr}, {canSelect});
 
@@ -363,6 +368,7 @@ class Main extends React.Component {
       */
       ...params,
       reaction: false,
+      rrcount: 1,
       mjrr: null,
       mjps: null,
       ions: ions,
@@ -626,13 +632,13 @@ class Main extends React.Component {
           <RWindow
             name={'Reacción'}
             onClick={() => this.reaction()}
-            secondary={true || !this.state.reaction}
-            title={this.state.reaction}
+            secondary={() => (true || !this.state.reaction)}
+            title={() => (this.state.reaction)}
             callback={() => this.reset()}
-            mjrr={this.state.mjrr}
-            mjps={this.state.mjps}
-            scheme={this.state.reaction}
-            size={this.state.reaproAmountState && this.state.reaproAmountState > 4}
+            mjrr={() => (this.state.mjrr)}
+            mjps={() => (this.state.mjps)}
+            scheme={() => (this.state.reaction)}
+            size={() => (this.state.reaproAmountState && this.state.reaproAmountState > 4)}
           />
         </div>
       );

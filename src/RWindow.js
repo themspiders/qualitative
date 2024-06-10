@@ -27,22 +27,22 @@ function Window(props) {
         backdrop="static"
         keyboard={false}
         centered={true}
-        size={props.size ? "lg" : null}
+        size={props.size() ? "lg" : null}
       >
         <Modal.Header>
-          <Modal.Title>{props.scheme ? 'Correcto!' : 'Incorrecto!'}</Modal.Title>
+          <Modal.Title>{props.scheme() ? 'Correcto!' : 'Incorrecto!'}</Modal.Title>
         </Modal.Header>
-        {props.scheme && props.mjrr ?
+        {props.scheme() ?
           <Modal.Body>
             <h4>{'Reacción balanceada:'}</h4>
             <br></br>
-            {props.mjrr}
+            {props.mjrr()}
           </Modal.Body>
         : null}
         <Modal.Footer class="modal-footer justify-content-between">
-          {props.scheme ? props.mjps : null}
+          {props.scheme() ? props.mjps() : null}
           <div className="footerButtons">
-            {props.secondary ? <Button variant="secondary" onClick={handleClose}>Reintentar</Button> : null}
+            {props.secondary() ? <Button variant="secondary" onClick={handleClose}>Reintentar</Button> : null}
            <Button variant="primary" onClick={onClickPrimary}>Siguiente</Button>
           </div>
         </Modal.Footer>
