@@ -1,5 +1,5 @@
 const whitecolor = '#ffffff';
-const colorless = '#colorless';
+const colorlessColor = '#colorless';
 const nopptColor = '#noppt';
 const nopptName = 'noppt';
 const defBlack = '#000000';
@@ -95,7 +95,7 @@ const colors = {
     default: defBlack,
   },
   'incoloro': {
-    shades: [colorless],
+    shades: [colorlessColor],
     display: 'incolora',
     default: defBlack,
   },
@@ -120,4 +120,4 @@ const doColorNames = (colorsArr) => {
   return colorsArr.reduce((a, x) => (a === "" ? a : a + "/") + doColorName(x), "");
 };
 
-export { colors, whitecolor, colorless, nopptColor, nopptName, getNamesFromColor, doColorName, doColorNames };
+export { colors, whitecolor, colorlessColor, nopptColor, nopptName, getNamesFromColor, doColorName, doColorNames };

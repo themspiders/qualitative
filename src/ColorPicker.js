@@ -2,7 +2,7 @@ import "./Main.css";
 import { useState } from "react";
 import { BlockPicker, CirclePicker } from "react-color";
 import Button from "react-bootstrap/Button";
-import { colors, whitecolor, colorless, nopptName, nopptColor, getNamesFromColor, doColorName, doColorNames } from "./colors.js";
+import { colors, whitecolor, colorlessColor, nopptName, nopptColor, getNamesFromColor, doColorName, doColorNames } from "./colors.js";
 import Select from "react-dropdown-select";
 
 function ColorPicker(props) {
@@ -36,14 +36,16 @@ function ColorPicker(props) {
     return ({value: x, label: makeLabel(x)});
   }
 
-  const options = Object.keys(colors).map((x) => (makeOption(x)));
-  const toRemove = (props.name === "PPT" ? colorless : (props.name === "SOL" ? nopptColor : null));
+  const opts = Object.keys(colors);
+  const toRemove = (props.name === "PPT" ? 'incoloro' : (props.name === "SOL" ? 'noppt' : null));
   if (toRemove) {
-      const index = options.indexOf(toRemove);
-      if (index > -1) {
-        options.splice(index, 1);
+    const index = opts.indexOf(toRemove);
+    if (index > -1) {
+      opts.splice(index, 1);
     }
   };
+  const options = opts.map((x) => (makeOption(x)));
+  console.log({toRemove}, {opts}, {options});
 
   
   const defColor = whitecolor;
@@ -52,7 +54,7 @@ function ColorPicker(props) {
 
   const nativeTitle = (color) => {
     return (
-      color === colorless
+      color === colorlessColor
       ? "INCOLORO"
       : (color === nopptColor
         ? "SIN PPT"
@@ -100,13 +102,13 @@ function ColorPicker(props) {
 
   const blackhex = {
     "PPT": nopptColor,
-    "SOL": colorless,
+    "SOL": colorlessColor,
   };
 
   const blockStyle = (color) => {
     const blocks = {
       [whitecolor]: defBlock,
-      [colorless]: defBlock,
+      [colorlessColor]: defBlock,
       [nopptColor]: defBlock,
       "default": defBlock,
       "color": {
@@ -143,7 +145,7 @@ function ColorPicker(props) {
     return (
       color === whitecolor
       ? "white-selected"
-      : (color === colorless
+      : (color === colorlessColor
         ? "colorless-selected"
         : (color === nopptColor
           ? "noppt-selected" 
