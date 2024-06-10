@@ -644,7 +644,7 @@ const rrssrc = {
     color: 'blanco',
   },
   'baso3': {
-    ltx: '{{{BaSO_{3}}_{(s)}}',
+    ltx: '{{BaSO_{3}}_{(s)}}',
     color: 'blanco',
   },
   'ag2so4': {
