@@ -85,14 +85,15 @@ class Main extends React.Component {
  }
 
   displaypptsol = (key, pptsol) => {
-    if (!pptsol) {
+    console.log('displaypptsol: ', key, pptsol);
+    if (key && !pptsol) {
       return <div></div>;
     }
     return (
-      <div style={{"user-select": "none", "color": colors[pptsol]["default"]}}>
+      <div style={{"user-select": "none", "color": colors[!key && !pptsol ? 'noppt' : pptsol].default}}>
       {
       !key
-        ? (pptsol === 'noppt' ? doColorName(pptsol, key) : 'PPT ' + doColorName(pptsol, key))
+        ? (pptsol === 'noppt' || !pptsol ? doColorName('noppt', key) : 'PPT ' + doColorName(pptsol, key))
         : ('SOL ' + doColorName(pptsol, key))
       }
       </div>
@@ -119,8 +120,8 @@ class Main extends React.Component {
   makeMjps = (rr) => {
     return (
       <div className="displaypptsol">
-        {this.displaypptsol(0, rr.ppt)}
-        {this.displaypptsol(1, rr.sol)}
+        {this.displaypptsol(false, rr.ppt)}
+        {this.displaypptsol(true, rr.sol)}
       </div>
     );
   }
@@ -518,7 +519,7 @@ class Main extends React.Component {
           name={'Revelar'}
           body={rr}
           footer={ps}
-          size={this.state.reaproAmount > 4}
+          size={() => (this.reaproAmount(this.state.chosenrr) > 3)}
           clickable={true}
           callback={() => {}}
         />
@@ -638,7 +639,7 @@ class Main extends React.Component {
             mjrr={() => (this.state.mjrr)}
             mjps={() => (this.state.mjps)}
             scheme={() => (this.state.reaction)}
-            size={() => (this.state.reaproAmountState && this.state.reaproAmountState > 4)}
+            size={() => (this.state.reaproAmountState && this.state.reaproAmountState > 3)}
           />
         </div>
       );

@@ -26,7 +26,7 @@ function Window(props) {
         backdrop="static"
         keyboard={false}
         centered={true}
-        size={props.size ? "lg" : null}
+        size={props.size() ? "lg" : null}
       >
         <Modal.Header>
           <Modal.Title>{props.title}</Modal.Title>
