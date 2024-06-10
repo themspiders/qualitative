@@ -1048,7 +1048,7 @@ const cationrrs = {
       pro: 'ni(oh)2',
       ppt: true,
       sol: 'verde',
-      coef: {'ni2´': 1, 'ho-exc': 2, 'ni(oh)2': 1},
+      coef: {'ni2+': 1, 'ho-exc': 2, 'ni(oh)2': 1},
     },
     'nh3': {
       pro: 'ni(oh)2',
