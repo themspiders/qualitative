@@ -156,6 +156,7 @@ class Main extends React.Component {
       let rrState = null;
       let mjrr = null;
       let mjps = null
+      console.log('reaction: ', reaction);
       if (reaction) {
         rrState = this.makeRRFromState(this.getpptFromRR(rrcare), rrcare["sol"]);
         mjrr = this.makeMjrr(rrState);
@@ -326,7 +327,7 @@ class Main extends React.Component {
     
     const pptcolor = (!canSelect["ppt"] ? (chosenrr["ppt"] ? this.getRandomFrom(colors[chosenrr["ppt"]].shades) : nopptColor) : null);
     const solcolor = (!canSelect["sol"] ? this.getRandomFrom(colors[chosenrr["sol"]].shades) : null);
-    const pptname = (!canSelect["ppt"] ? (chosenrr["ppt"] ? chosenrr["ppt"] : false) : null);
+    const pptname = (!canSelect["ppt"] ? (chosenrr["ppt"] ? chosenrr["ppt"] : nopptName) : null);
     const solname = (!canSelect["sol"] ? chosenrr["sol"] : null);
 
 
@@ -432,8 +433,8 @@ class Main extends React.Component {
     ["rrcare.sol", rrcare.sol],
     ["this.state.sol", this.state.sol],
     ["sol === sol", rrcare.sol ===  this.state.sol],
-    ["[ipro[this.state.pro][color]", (this.state.pro ? this.state.ipro[this.state.pro]["color"] : null)],
-    ["colors[ipro[this.state.pro][color]", (this.state.pro ? colors[this.state.ipro[this.state.pro]["color"]].shades : null)],
+//    ["[ipro[this.state.pro][color]", (this.state.pro ? this.state.ipro[this.state.pro]["color"] : null)],
+//    ["colors[ipro[this.state.pro][color]", (this.state.pro ? colors[this.state.ipro[this.state.pro]["color"]].shades : null)],
     ];
     vars.forEach(([key, value]) => {console.log(`${key}: `, value)});
   }
@@ -630,6 +631,7 @@ class Main extends React.Component {
             callback={() => this.reset()}
             mjrr={this.state.mjrr}
             mjps={this.state.mjps}
+            scheme={this.state.reaction}
             size={this.state.reaproAmountState && this.state.reaproAmountState > 4}
           />
         </div>
@@ -639,7 +641,7 @@ class Main extends React.Component {
     const debugButtons = () => {
       return (
         <div className="buttons">
-          {false
+          {true
           ? <Button onClick={() => this.debug()}>
               {'Debug'}
             </Button>

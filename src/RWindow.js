@@ -30,9 +30,9 @@ function Window(props) {
         size={props.size ? "lg" : null}
       >
         <Modal.Header>
-          <Modal.Title>{props.title ? 'Correcto!' : 'Incorrecto!'}</Modal.Title>
+          <Modal.Title>{props.scheme ? 'Correcto!' : 'Incorrecto!'}</Modal.Title>
         </Modal.Header>
-        {props.mjrr ?
+        {props.scheme && props.mjrr ?
           <Modal.Body>
             <h4>{'Reacción balanceada:'}</h4>
             <br></br>
@@ -40,7 +40,7 @@ function Window(props) {
           </Modal.Body>
         : null}
         <Modal.Footer class="modal-footer justify-content-between">
-          {props.mjrr ? props.mjps : null}
+          {props.scheme ? props.mjps : null}
           <div className="footerButtons">
             {props.secondary ? <Button variant="secondary" onClick={handleClose}>Reintentar</Button> : null}
            <Button variant="primary" onClick={onClickPrimary}>Siguiente</Button>

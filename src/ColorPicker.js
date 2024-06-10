@@ -39,7 +39,7 @@ function ColorPicker(props) {
   const options = Object.keys(colors).map((x) => (makeOption(x)));
   const toRemove = (props.name === "PPT" ? colorless : (props.name === "SOL" ? nopptColor : null));
   if (toRemove) {
-    const index = options.indexOf(toRemove);
+      const index = options.indexOf(toRemove);
       if (index > -1) {
         options.splice(index, 1);
     }
