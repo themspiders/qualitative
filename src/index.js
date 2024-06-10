@@ -16,6 +16,7 @@ root.render(
         title={initTitle}
         body={initText}
         clickable={false}
+        show={true}
       >
       </Window>
     : null}
