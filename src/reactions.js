@@ -1431,6 +1431,8 @@ const cationrrs = {
       pro: '[sn(oh)4]2-',
       ppt: false,
       sol: 'incoloro',
+      rea2: 'h2o',
+      pro2: 'nh4+',
       coef: {'sn2+': 1, 'nh3exc': 4, 'h2o': 4, '[sn(oh)4]2-': 1, 'nh4+': 4},
     },
     's2-': {

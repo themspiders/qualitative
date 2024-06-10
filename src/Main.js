@@ -141,9 +141,15 @@ class Main extends React.Component {
           || (rrcare.ppt && this.state.pptcolor && colors[this.state.ipro[this.state.pro]["color"]].shades.includes(this.state.pptcolor)))
         && (!rrcare.sol || (rrcare.sol && colors[rrcare["sol"]].shades.includes(this.state.solcolor)))
       );
-      const mjrr = (reaction ? this.makeMjrr(this.makeRRFromState(this.getpptFromRR(rrcare), rrcare["sol"])) : null);
+//      const mjrr = (reaction ? this.makeMjrr(this.makeRRFromState(this.getpptFromRR(rrcare), rrcare["sol"])) : null);
+      let rrState = null;
+      let mjrr = null;
+      if (reaction) {
+        rrState = this.makeRRFromState(this.getpptFromRR(rrcare), rrcare["sol"]);
+        mjrr = this.makeMjrr(rrState);
+      }
       //const mjrr = this.ltx('{{{Mn}^{2+}}_{(ac)}}');
-      this.setState({reaction: reaction, mjrr: mjrr});
+      this.setState({reaction: reaction, mjrr: mjrr, reaproAmountState: (reaction ? this.reaproAmount(rrState) : null)});
     } else {
       this.setState({reaction: false, mjrr: null});
     }
@@ -202,7 +208,10 @@ class Main extends React.Component {
   getRandomSubArr = (arr, sublength) => {
     const ret = arr;
     const length = ret.length;
-    if (!sublength || length < sublength) {
+    if (sublength === null) {
+      return [];
+    }
+    if (sublength && length < sublength) {
       return ret;
     }
     [...Array(length - sublength)].forEach((x) => {
@@ -352,6 +361,7 @@ class Main extends React.Component {
       pptcolor: pptcolor,
       solcolor: solcolor,
       reaproAmount: this.reaproAmount(chosenrr),
+      reaproAmountState: null,
     };
   }
 
@@ -450,7 +460,9 @@ class Main extends React.Component {
   }
   
   reaproAmount = (rr) => {
+    console.log('rA: ', rr);
     const am = ["ion", "rea", "pro", "rea2", "rea3", "pro2", "pro3"].map((x) => rr[x]);
+    console.log('suma: ', am.reduce((a, x) => a + (x ? 1 : 0), 0));
     return (am.reduce((a, x) => a + (x ? 1 : 0), 0));
   }
 
@@ -589,7 +601,7 @@ class Main extends React.Component {
             title={this.state.reaction}
             callback={() => this.reset()}
             mjrr={this.state.mjrr}
-            size={this.state.mjrr && this.reaproAmount(this.state.mjrr) > 4}
+            size={this.state.reaproAmountState && this.state.reaproAmountState > 4}
           />
         </div>
       );
