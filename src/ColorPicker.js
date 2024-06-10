@@ -27,7 +27,7 @@ function ColorPicker(props) {
   const makeLabel = (color) => {
     return (
       <div style={{color: colors[color].default}}>
-        {doColorName(color)}
+        {doColorName(color, props.name === "PPT" ? false : true)}
       </div>
     );
   }

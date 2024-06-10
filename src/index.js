@@ -14,7 +14,7 @@ root.render(
       <Window
         callback={() => {}}
         title={initTitle}
-        body={initText}
+//        body={initText}
         clickable={false}
         show={true}
       >

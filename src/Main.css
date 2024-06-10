@@ -76,9 +76,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
   margin: auto;
-  top: 30%;
+  top: 40%;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);

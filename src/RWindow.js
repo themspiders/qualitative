@@ -39,7 +39,7 @@ function Window(props) {
             {props.mjrr()}
           </Modal.Body>
         : null}
-        <Modal.Footer class="modal-footer justify-content-between">
+        <Modal.Footer class={props.scheme() ? "modal-footer justify-content-between" : "modal-footer justify-content-end"}>
           {props.scheme() ? props.mjps() : null}
           <div className="footerButtons">
             {props.secondary() ? <Button variant="secondary" onClick={handleClose}>Reintentar</Button> : null}

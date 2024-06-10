@@ -89,11 +89,11 @@ class Main extends React.Component {
       return <div></div>;
     }
     return (
-      <div style={{"user-select": "none", "color": colors[!pptsol ? 'noppt' : pptsol]["default"]}}>
+      <div style={{"user-select": "none", "color": colors[pptsol]["default"]}}>
       {
       !key
-        ? 'PPT ' + doColorName(!pptsol ? 'noppt' : pptsol)
-        : 'SOL ' + doColorName(pptsol)
+        ? (pptsol === 'noppt' ? doColorName(pptsol, key) : 'PPT ' + doColorName(pptsol, key))
+        : ('SOL ' + doColorName(pptsol, key))
       }
       </div>
     );
@@ -317,14 +317,14 @@ class Main extends React.Component {
     });
 
     const rrparams = this.getParams(chosenrr);
-    const numParams = Math.floor(rrparams.length/2) + 2; //(allParams.length/2 % 2);
+    const numParams = Math.floor(rrparams.length/2) + 1; //(allParams.length/2 % 2);
     const selectedParams = this.getRandomSubArr(rrparams, numParams);
 //    console.log('subarr: ', selectedParams);
     const canSelect = {};
     allParams.forEach((x) => {
       canSelect[x] = !selectedParams.includes(x);
     });
-    canSelect["ppt"] = true;
+//    canSelect["ppt"] = true;
     
     console.log({chosenrr}, {canSelect});
 
@@ -368,7 +368,7 @@ class Main extends React.Component {
       */
       ...params,
       reaction: false,
-      rrcount: 1,
+      rrcount: 0,
       mjrr: null,
       mjps: null,
       ions: ions,
@@ -668,9 +668,9 @@ class Main extends React.Component {
       <div className="center">
         <div className="allreaction">
           {reaction()}
-          {rrButton()}
         </div>
         {pptsol()}
+        {rrButton()}
       </div>
       </MathJaxContext>
       {debugButtons()}
