@@ -463,7 +463,7 @@ const rrssrc = {
     color: 'blanco',
   },
   '[sn(oh)4]2-': {
-    ltx: '{{{[Sn{(OH)}_{4}]}^{2-}}_{(s)}}',
+    ltx: '{{{[Sn{(OH)}_{4}]}^{2-}}_{(ac)}}',
     color: 'blanco',
   },
   'sns': {
