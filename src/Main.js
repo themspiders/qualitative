@@ -647,7 +647,7 @@ class Main extends React.Component {
     const debugButtons = () => {
       return (
         <div className="buttons">
-          {true
+          {false
           ? <Button onClick={() => this.debug()}>
               {'Debug'}
             </Button>
