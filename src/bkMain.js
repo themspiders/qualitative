@@ -1,13 +1,14 @@
 import "./Main.css";
-import React, { useState } from "react";
+import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
-import { cations, crea, cpro, rrs } from "./reactions.js";
-import Select from "react-dropdown-select";
+import { rrssrc, cationrrs, anionrrs, rrs } from "./reactions.js";
 import Reapro from "./Reapro.js";
-import Window from "./Window.js";
+import RWindow from "./RWindow.js";
 import ColorPicker from "./ColorPicker.js";
-import { colors, noppt } from "./colors.js";
+import { colors, noppt, doColorName } from "./colors.js";
 import Button from "react-bootstrap/Button";
+import Window from "./Window.js";
+import { bottomright } from "./consts.js";
 
 const config = {
   tex: {
@@ -30,9 +31,6 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.sol = null;
-//    console.log(Object.keys(rrs));
-    //const x = Object.keys(rrs);
-//    this.options = Object.keys(rrs).map(x => ({value: x, label: this.rpltx(x)}));
     this.state = this.getInitialState();
   }
 
@@ -44,20 +42,13 @@ class Main extends React.Component {
     return (this.getNewState(false));
   }
 
-
-  setReapro2 = () => {
-    console.log('setReapro2');
-    ["rea2", "rea3", "pro2", "pro3"].forEach((x) => {this.setState({[x]: (this.state[x] && !this.showReapro2(x) ? null : this.state[x])})});
-  }
-  
   // undefined.x = error
   // defined.noexiste = undefined
 
   ltx = (x, source, coef) => {
     let ret = (source ? (source[x] && source[x]['ltx']) : x)
-//    const coef = (setCoef && source[x] && source[x]['
-    if (coef && coef > 1) {
-      ret = `{${coef} ~ ${ret}}`;
+    if (coef && coef[x] && coef[x] > 1) {
+      ret = `{${coef[x]} ~ ${ret}}`;
     }
     return (
       <MathJax inline dynamic>
@@ -76,23 +67,63 @@ class Main extends React.Component {
       : null
     );
   }
+  
+  makeRRFromState = (ppt, sol) => {
+    return ({
+      ion: this.state.ion,
+      rea: this.state.rea,
+      rea2: this.state.rea2,
+      rea3: this.state.rea3,
+      pro: this.state.pro,
+      pro2: this.state.pro2,
+      pro3: this.state.pro3,
+      ppt: ppt,
+      sol: sol,
+      coef: (rrs[this.state.ion] && rrs[this.state.ion][this.state.rea]
+        ? rrs[this.state.ion][this.state.rea]['coef'] : null),
+   });
+ }
 
-  makeMjrr = () => {
-    const coef = rrs[this.state.ion][this.state.rea]['coef'];
-    console.log('coef: ', coef);
+  displaypptsol = (key, pptsol) => {
     return (
-      <MathJaxContext version={3} config={config}>
-        {this.ltx(this.state.ion, this.state.ions, coef[this.state.ion])}
-        {this.ltx("~ + ~")}
-        {this.ltx(this.state.rea, this.state.irea, coef[this.state.rea])}
-        {this.plusr(this.state.rea2, this.state.irea2, coef[this.state.rea2])}
-        {this.plusr(this.state.rea3, this.state.irea2, coef[this.state.rea3])}
-        {this.ltx("~ \\rightarrow ~")}
-        {this.ltx(this.state.pro, this.state.ipro, coef[this.state.pro])}
-        {this.plusr(this.state.pro2, this.state.ipro2, coef[this.state.pro2])}
-        {this.plusr(this.state.pro3, this.state.ipro3, coef[this.state.pro3])}
-      </MathJaxContext>
+      !key
+        ? 'PPT: ' + doColorName(!pptsol ? 'noppt' : pptsol)
+        : (pptsol
+          ? 'SOL: ' + doColorName(pptsol)
+          : null
+          )
     );
+  }
+
+  makeMjrr = (rr) => {
+//    console.log('coef: ', rr.coef);
+    return (
+      <div>
+      <MathJaxContext version={3} config={config}>
+        {this.ltx(rr.ion, rrssrc, rr.coef)}
+        {this.ltx("~ + ~")}
+        {this.ltx(rr.rea, rrssrc, rr.coef)}
+        {this.plusr(rr.rea2, rrssrc, rr.coef)}
+        {this.plusr(rr.rea3, rrssrc, rr.coef)}
+        {this.ltx("~ \\rightarrow ~")}
+        {this.ltx(rr.pro, rrssrc, rr.coef)}
+        {this.plusr(rr.pro2, rrssrc, rr.coef)}
+        {this.plusr(rr.pro3, rrssrc, rr.coef)}
+      </MathJaxContext>
+      <div className="displaypptsol">
+        <br></br>{this.displaypptsol(0, rr.ppt)}
+        <br></br>{this.displaypptsol(1, rr.sol)}
+      </div>
+      </div>
+    );
+  }
+  
+  getpptFromRR = (rr) => {
+    if (rr.ppt) {
+      return rrssrc[rr.pro]["color"];
+    } else {
+      return false;
+    }
   }
 
   reaction = () => {
@@ -110,27 +141,23 @@ class Main extends React.Component {
           || (rrcare.ppt && this.state.pptcolor && colors[this.state.ipro[this.state.pro]["color"]].shades.includes(this.state.pptcolor)))
         && (!rrcare.sol || (rrcare.sol && colors[rrcare["sol"]].shades.includes(this.state.solcolor)))
       );
-      const mjrr = (reaction ? this.makeMjrr() : null);
+//      const mjrr = (reaction ? this.makeMjrr(this.makeRRFromState(this.getpptFromRR(rrcare), rrcare["sol"])) : null);
+      let rrState = null;
+      let mjrr = null;
+      if (reaction) {
+        rrState = this.makeRRFromState(this.getpptFromRR(rrcare), rrcare["sol"]);
+        mjrr = this.makeMjrr(rrState);
+      }
       //const mjrr = this.ltx('{{{Mn}^{2+}}_{(ac)}}');
-      this.setState({reaction: reaction, mjrr: mjrr});
+      this.setState({reaction: reaction, mjrr: mjrr, reaproAmountState: (reaction ? this.reaproAmount(rrState) : null)});
     } else {
       this.setState({reaction: false, mjrr: null});
     }
   }
-  
-  reset1 = () => {
-  console.log("document: ", document.getElementById("cr3+"));
-  return;
-  }
 
   getRandomFrom = (arr, x) => {
-    console.log('GRF: ', {arr}, {x});
+//    console.log('GRF: ', {arr}, {x});
     return (arr[Math.floor(Math.random() * arr.length)]);
-  }
-  
-  getReas = (ion) => {
-    const reas = Object.keys(crea).filter((x) => rrs[ion][x]);
-    console.log('getReas: ', ion, reas);
   }
 
   iifnot = (x, arr) => {
@@ -141,7 +168,6 @@ class Main extends React.Component {
   }
 
   getAll = () => {
-//    const ions = [];
     const reas = {};
     const rea2s = {};
     const rea3s = {};
@@ -150,25 +176,16 @@ class Main extends React.Component {
     const pro3s = {};
     
     for (let ion in rrs) {
-//      this.iifnot(ion, ions);
-//      console.log('ion: ', ion);
       for (let rea in rrs[ion]) {
-//        console.log('rea: ', rea);
-//        console.log('ionrea = rrs[ion][rea]: ', rrs[ion][rea]);
-        reas[rea] = crea[rea];
+        reas[rea] = rrssrc[rea];
         const ionrea = rrs[ion][rea];
         [["rea2", rea2s], ["rea3", rea3s], ["pro2", pro2s], ["pro3", pro3s]].forEach(([key, s]) => {
           if (ionrea[key] && !s[ionrea[key]]) {
-            s[ionrea[key]] = (key[0] === "r" ? crea[ionrea[key]] : cpro[ionrea[key]]);
-            if (!s[ionrea[key]]) {
-//              console.log('s: ', s, 'ionrea: ', ionrea, 'ionrea[key]: ', ionrea[key]);
-            }
+            s[ionrea[key]] = rrssrc[ionrea[key]];
           }
         });
       }
     }
-        console.log('pross: ', pros);
-//  console.log('getAll: ', reas, rea2s, rea3s, pros, pro2s, pro3s);
   return [reas, rea2s, rea3s, pros, pro2s, pro3s];
   }
   
@@ -191,6 +208,12 @@ class Main extends React.Component {
   getRandomSubArr = (arr, sublength) => {
     const ret = arr;
     const length = ret.length;
+    if (sublength === null) {
+      return [];
+    }
+    if (sublength && length < sublength) {
+      return ret;
+    }
     [...Array(length - sublength)].forEach((x) => {
       const index = Math.floor(Math.random() * ret.length);
       ret.splice(index, 1);
@@ -215,6 +238,7 @@ class Main extends React.Component {
 
   getAll2 = (rand) => {
 //    const ions = [];
+    const sions = [];
     const reas = [];
     const rea2s = [];
     const rea3s = [];
@@ -231,13 +255,13 @@ class Main extends React.Component {
 //        console.log('ionrea = rrs[ion][rea]: ', rrs[ion][rea]);
         //reaction = ionrea
         const ionrea = rrs[ion][rea];
-        if (cations[ion]) {
-          reactions.push({ion: ion, rea: rea, ...ionrea, ppt: this.getPPT(ion, rea, cpro),});
+        if (rrssrc[ion]) {
+          reactions.push({ion: ion, rea: rea, ...ionrea, ppt: this.getPPT(ion, rea, rrssrc),});
         }
       }
     }
     
-    console.log('reactions: ', reactions);
+    //console.log('reactions: ', reactions);
     
     if (rand) {
       reactions = this.getRandomSubArr(reactions, rand);
@@ -245,35 +269,40 @@ class Main extends React.Component {
     
     console.log('reactions: ', reactions);
     
+    //console.log({sions}, {reas}, {rea2s}, {rea3s}, {pros}, {pro2s}, {pro3s});
+        
     reactions.forEach((rr) => {
-//      this.iifnot(rea, reas);
-//      this.iifnot(ionrea["rea2"], rea2s);
-//      this.iifnot(ionrea["rea3"], rea3s);
-//      this.iifnot(ionrea["pro"], pros);
-//      this.iifnot(ionrea["pro2"], pro2s);
-//      this.iifnot(ionrea["pro3"], pro3s);
-      [[rr["rea"], reas], [rr["rea2"], rea2s], [rr["rea3"], rea3s], [rr["pro"], pros], [rr["pro2"], pro2s], [rr["pro3"], pro3s]]
+      [
+      [rr["ion"], sions],
+      [rr["rea"], reas],
+      [rr["rea2"], rea2s],
+      [rr["rea3"], rea3s],
+      [rr["pro"], pros],
+      [rr["pro2"], pro2s],
+      [rr["pro3"], pro3s],
+      ]
       .forEach(([rp, addToArr]) => {
+        if (false && rp && !rrssrc[rp]) {
+          console.log('no ltx: ', rp);
+        }
         this.iifnot(rp, addToArr);
       });
     });
 
     const chosenrr = this.getRandomFrom(reactions);
       
-    const [irea, irea2, irea3, ipro, ipro2, ipro3] = [{}, {}, {}, {}, {}, {}];
-//  [irea, irea2, irea3, ipro, ipro2, ipro3]
-    const [rs, ps] = [crea, cpro];
-    [[reas, irea, rs], [rea2s, irea2, rs], [rea3s, irea3, rs], [pros, ipro, ps], [pro2s, ipro2, ps], [pro3s, ipro3, ps]]
-    .forEach(([arr, obj, source]) => {
+    const [ions, irea, irea2, irea3, ipro, ipro2, ipro3] = [{}, {}, {}, {}, {}, {}, {}];
+    [[sions, ions], [reas, irea], [rea2s, irea2], [rea3s, irea3], [pros, ipro], [pro2s, ipro2], [pro3s, ipro3]]
+    .forEach(([arr, obj]) => {
       for(const rp of arr) {
-        obj[rp] = source[rp];
+        obj[rp] = rrssrc[rp];
       }
     });
 
     const rrparams = this.getParams(chosenrr);
     const numParams = Math.floor(rrparams.length/2) + 1; //(allParams.length/2 % 2);
     const selectedParams = this.getRandomSubArr(rrparams, numParams);
-    console.log('subarr: ', selectedParams);
+//    console.log('subarr: ', selectedParams);
     const canSelect = {};
     allParams.forEach((x) => {
       canSelect[x] = !selectedParams.includes(x);
@@ -288,16 +317,12 @@ class Main extends React.Component {
 
 //    console.log('getAllRea2: ', reas, rea2s, rea3s, pros, pro2s, pro3s);
 //    console.log('getAllRea2: ', irea, irea2, irea3, ipro, ipro2, ipro3);
-    return [irea, irea2, irea3, ipro, ipro2, ipro3, chosenrr, canSelect, pptcolor, solcolor];
+    return [ions, irea, irea2, irea3, ipro, ipro2, ipro3, chosenrr, canSelect, pptcolor, solcolor];
   }
 
-  getNewState = (reset) => {
-    const numReactions = 11;
-//    [this.ca, this.re, this.pro, this.rea2, this.rea3, this.pro2, this.pro3] = [null, null, null, null, null, null, null];
-//    console.log("rea: ", this.state.rea);
-//    this.setState({});
-    const [reas, rea2s, rea3s, pros, pro2s, pro3s, chosenrr, canSelect, pptcolor, solcolor] = this.getAll2(numReactions);
-    //la desicion es: si hay algun reactivo o producto preseleccionado que identifique una reaccion de amoniaco
+  getNewState = (reset, numReactions = 11) => {
+    const [ions, reas, rea2s, rea3s, pros, pro2s, pro3s, chosenrr, canSelect, pptcolor, solcolor] = this.getAll2(numReactions);
+    //la decision es: si hay algun reactivo o producto preseleccionado que identifique una reaccion de amoniaco
     //entonces todos los repros estan visibles por defecto.
     const params = {};
     allParams.forEach((x) => {
@@ -323,29 +348,30 @@ class Main extends React.Component {
       ...params,
       reaction: false,
       mjrr: null,
-      ions: cations,
+      ions: ions,
       irea: reas,
       irea2: rea2s,
       irea3: rea3s,
       ipro: pros,
       ipro2: pro2s,
-      ipro3: pro2s,
+      ipro3: pro3s,
       reset: reset,
       chosenrr: chosenrr,
       canSelect: canSelect,
       pptcolor: pptcolor,
       solcolor: solcolor,
+      reaproAmount: this.reaproAmount(chosenrr),
+      reaproAmountState: null,
     };
   }
 
   reset = () => {
+//    console.log('reset: ');
     const newState = this.getNewState(!this.state.reset);
     this.setState({
       ...newState,
       reset: !this.state.reset,
     });
-    
-//    this.setState({irea: reas, irea2: rea2s, irea3: rea3s, ipro: pros, ipro2: pro2s, ipro3: pro3s});
   }
 
   test = () => {
@@ -353,13 +379,22 @@ class Main extends React.Component {
 //    const am = ["ion", "rea", "pro", "rea2", "rea3", "pro2", "pro3"].map((x) => this.state[x]);
 //    console.log(am, am.reduce((a, x) => a + (x && x !== true ? 1 : 0), 0));
   }
+  
+  testltx = () => {
+    this.getNewState(!this.state.reset, false);
+  }
 
   debug = () => {
+    if (false && this.state.chosenrr) {
+      console.log('debug: rA: ', this.reaproAmount(this.state.chosenrr));
+    }
+//    this.testltx(); return;
+//    console.log('debug: ', this.state.chosenrr);
+    return;
     if (!(this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea])) {
       console.log('debug: false');
       return;
     }
-    console.log('debug');
     const rrcare = rrs[this.state.ion][this.state.rea];
     const vars = [
     ["this.state.ion", this.state.ion],
@@ -415,17 +450,19 @@ class Main extends React.Component {
   }
 
   setPPT = (color) => {
-    console.log("setPPT: ", color);
+//    console.log("setPPT: ", color);
     this.setState({pptcolor: color});
   }
 
   setSOL = (color) => {
-    console.log("setSOL: ", color);
+//    console.log("setSOL: ", color);
     this.setState({solcolor: color});
   }
   
-  reaproAmount = () => {
-    const am = ["ion", "rea", "pro", "rea2", "rea3", "pro2", "pro3"].map((x) => this.state[x]);
+  reaproAmount = (rr) => {
+    console.log('rA: ', rr);
+    const am = ["ion", "rea", "pro", "rea2", "rea3", "pro2", "pro3"].map((x) => rr[x]);
+    console.log('suma: ', am.reduce((a, x) => a + (x ? 1 : 0), 0));
     return (am.reduce((a, x) => a + (x ? 1 : 0), 0));
   }
 
@@ -442,6 +479,22 @@ class Main extends React.Component {
     }
     return ret;
   };
+  
+//  const allreactions = () => {
+  reveal = () => {
+    const rr = this.makeMjrr(this.state.chosenrr);
+    return (
+      <div className="rrButton">
+        <Window
+          name={'Revelar'}
+          body={rr}
+          size={this.state.reaproAmount > 4}
+          clickable={true}
+          callback={() => {}}
+        />
+      </div>
+    );
+  }
 
   render() {
     const ltx = (x) => {
@@ -508,7 +561,7 @@ class Main extends React.Component {
             disabled={!this.state.canSelect.ppt}
           />
           : null}
-          {true || ( this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea] && rrs[this.state.ion][this.state.rea]["sol"])
+          {(this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea] && rrs[this.state.ion][this.state.rea]["sol"])
           ? <ColorPicker
               key={"SOL" + this.state.reset}
               name={"SOL"}
@@ -540,15 +593,15 @@ class Main extends React.Component {
 
     const rrButton = () => {
       return (
-        <div className="buttons">
-          <Window
+        <div className="rrButton">
+          <RWindow
             name={'Reacción'}
             onClick={() => this.reaction()}
             secondary={true || !this.state.reaction}
             title={this.state.reaction}
             callback={() => this.reset()}
             mjrr={this.state.mjrr}
-            size={this.state.mjrr && this.reaproAmount() > 4}
+            size={this.state.reaproAmountState && this.state.reaproAmountState > 4}
           />
         </div>
       );
@@ -557,31 +610,37 @@ class Main extends React.Component {
     const debugButtons = () => {
       return (
         <div className="buttons">
-          {true
+          {false
           ? <Button onClick={() => this.debug()}>
-              debug
+              {'Debug'}
             </Button>
           : null}
           {true
           ? <Button onClick={() => this.test()}>
-              test
+              {'Reset'}
             </Button>
           : null}
+          {this.reveal()}
         </div>
       );
     }
 
     return (
+      <div>
       <MathJaxContext version={3} config={config}>
       <div className="center">
         <div className="allreaction">
           {reaction()}
           {rrButton()}
         </div>
-        {debugButtons()}
         {pptsol()}
       </div>
       </MathJaxContext>
+      {debugButtons()}
+      <div className="bottomright">
+        {bottomright}
+      </div>
+      </div>
     );
   }
 }

@@ -54,9 +54,8 @@ class Reapro extends React.Component {
       <Select 
         options={this.props.options}
         onChange={(select) => this.setReapro(select)}
-//        values={(this.props.values ? this.tovl(this.props.values) : [])}
-//        values={[{value: this.props.value, label: this.props.value}]} 
-          values={value ? [value] : []}
+        values={value ? [value] : []}
+        placeholder={"Seleccionar..."}
       />
     );
   }

@@ -142,11 +142,19 @@
 
 .displaypptsol {
   display: flex;
+  flex-direction: column;
+}
+
+
+.modal-footer {
+  flex-direction: space-between !important;
+}
+
+.footerButtons {
+  display: flex;
   justify-content: space-between;
-  align-items: center;
   flex-direction: row;
-  position: absolute;
-  gap: 30px;
+  gap: 10px;
 }
 
 .colorpicker {

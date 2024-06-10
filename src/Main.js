@@ -5,7 +5,7 @@ import { rrssrc, cationrrs, anionrrs, rrs } from "./reactions.js";
 import Reapro from "./Reapro.js";
 import RWindow from "./RWindow.js";
 import ColorPicker from "./ColorPicker.js";
-import { colors, noppt, doColorName } from "./colors.js";
+import { colors, nopptName, nopptColor, doColorName } from "./colors.js";
 import Button from "react-bootstrap/Button";
 import Window from "./Window.js";
 import { bottomright } from "./consts.js";
@@ -85,20 +85,23 @@ class Main extends React.Component {
  }
 
   displaypptsol = (key, pptsol) => {
+    if (!pptsol) {
+      return <div></div>;
+    }
     return (
+      <div style={{color: colors[!pptsol ? 'noppt' : pptsol]["default"]}}>
+      {
       !key
-        ? 'PPT: ' + doColorName(!pptsol ? 'noppt' : pptsol)
-        : (pptsol
-          ? 'SOL: ' + doColorName(pptsol)
-          : null
-          )
+        ? 'PPT ' + doColorName(!pptsol ? 'noppt' : pptsol)
+        : 'SOL ' + doColorName(pptsol)
+      }
+      </div>
     );
   }
 
   makeMjrr = (rr) => {
 //    console.log('coef: ', rr.coef);
     return (
-      <div>
       <MathJaxContext version={3} config={config}>
         {this.ltx(rr.ion, rrssrc, rr.coef)}
         {this.ltx("~ + ~")}
@@ -110,10 +113,14 @@ class Main extends React.Component {
         {this.plusr(rr.pro2, rrssrc, rr.coef)}
         {this.plusr(rr.pro3, rrssrc, rr.coef)}
       </MathJaxContext>
+    );
+  }
+  
+  makeMjps = (rr) => {
+    return (
       <div className="displaypptsol">
-        <br></br>{this.displaypptsol(0, rr.ppt)}
-        <br></br>{this.displaypptsol(1, rr.sol)}
-      </div>
+        {this.displaypptsol(0, rr.ppt)}
+        {this.displaypptsol(1, rr.sol)}
       </div>
     );
   }
@@ -126,6 +133,10 @@ class Main extends React.Component {
     }
   }
 
+//        && ((!rrcare.ppt && this.state.pptcolor === noppt)
+//          || (rrcare.ppt && this.state.pptcolor && colors[this.state.ipro[this.state.pro]["color"]].shades.includes(this.state.pptcolor)))
+//        && (!rrcare.sol || (rrcare.sol && colors[rrcare["sol"]].shades.includes(this.state.solcolor)))
+
   reaction = () => {
 //    this.reset();
 //    return;
@@ -137,21 +148,22 @@ class Main extends React.Component {
         && ((!rrcare.rea3 && !this.state.rea3) || (rrcare.rea3 && this.state.rea3 && rrcare.rea3 === this.state.rea3))
         && ((!rrcare.pro2 && !this.state.pro2) || (rrcare.pro2 && this.state.pro2 && rrcare.pro2 === this.state.pro2))
         && ((!rrcare.pro3 && !this.state.pro3) || (rrcare.pro3 && this.state.pro3 && rrcare.pro3 === this.state.pro3))
-        && ((!rrcare.ppt && this.state.pptcolor === noppt)
-          || (rrcare.ppt && this.state.pptcolor && colors[this.state.ipro[this.state.pro]["color"]].shades.includes(this.state.pptcolor)))
-        && (!rrcare.sol || (rrcare.sol && colors[rrcare["sol"]].shades.includes(this.state.solcolor)))
+        && ((!rrcare.ppt && this.state.ppt === nopptName)
+          || (rrcare.ppt && this.state.ppt && this.state.ipro[this.state.pro]["color"] === this.state.ppt))
+        && (!rrcare.sol || (rrcare.sol && rrcare["sol"] === this.state.sol))
       );
 //      const mjrr = (reaction ? this.makeMjrr(this.makeRRFromState(this.getpptFromRR(rrcare), rrcare["sol"])) : null);
       let rrState = null;
       let mjrr = null;
+      let mjps = null
       if (reaction) {
         rrState = this.makeRRFromState(this.getpptFromRR(rrcare), rrcare["sol"]);
         mjrr = this.makeMjrr(rrState);
+        mjps = this.makeMjps(rrState);
+        this.setState({reaction: reaction, mjrr: mjrr, mjps: mjps, reaproAmountState: (reaction ? this.reaproAmount(rrState) : null)});
       }
-      //const mjrr = this.ltx('{{{Mn}^{2+}}_{(ac)}}');
-      this.setState({reaction: reaction, mjrr: mjrr, reaproAmountState: (reaction ? this.reaproAmount(rrState) : null)});
     } else {
-      this.setState({reaction: false, mjrr: null});
+      this.setState({reaction: false, mjrr: null, mjps: null});
     }
   }
 
@@ -312,16 +324,19 @@ class Main extends React.Component {
 
 //    const [pptcolor, solcolor] = [...["ppt", "sol"].map((x) => (!canSelect[x] ? this.getRandomFrom(colors[chosenrr[x]], 1) : null))];
     
-    const pptcolor = (!canSelect["ppt"] ? (chosenrr["ppt"] ? this.getRandomFrom(colors[chosenrr["ppt"]].shades) : noppt) : null);
+    const pptcolor = (!canSelect["ppt"] ? (chosenrr["ppt"] ? this.getRandomFrom(colors[chosenrr["ppt"]].shades) : nopptColor) : null);
     const solcolor = (!canSelect["sol"] ? this.getRandomFrom(colors[chosenrr["sol"]].shades) : null);
+    const pptname = (!canSelect["ppt"] ? (chosenrr["ppt"] ? chosenrr["ppt"] : false) : null);
+    const solname = (!canSelect["sol"] ? chosenrr["sol"] : null);
+
 
 //    console.log('getAllRea2: ', reas, rea2s, rea3s, pros, pro2s, pro3s);
 //    console.log('getAllRea2: ', irea, irea2, irea3, ipro, ipro2, ipro3);
-    return [ions, irea, irea2, irea3, ipro, ipro2, ipro3, chosenrr, canSelect, pptcolor, solcolor];
+    return [ions, irea, irea2, irea3, ipro, ipro2, ipro3, chosenrr, canSelect, pptcolor, pptname, solcolor, solname];
   }
 
   getNewState = (reset, numReactions = 11) => {
-    const [ions, reas, rea2s, rea3s, pros, pro2s, pro3s, chosenrr, canSelect, pptcolor, solcolor] = this.getAll2(numReactions);
+    const [ions, reas, rea2s, rea3s, pros, pro2s, pro3s, chosenrr, canSelect, pptcolor, pptname, solcolor, solname] = this.getAll2(numReactions);
     //la decision es: si hay algun reactivo o producto preseleccionado que identifique una reaccion de amoniaco
     //entonces todos los repros estan visibles por defecto.
     const params = {};
@@ -348,6 +363,7 @@ class Main extends React.Component {
       ...params,
       reaction: false,
       mjrr: null,
+      mjps: null,
       ions: ions,
       irea: reas,
       irea2: rea2s,
@@ -360,6 +376,8 @@ class Main extends React.Component {
       canSelect: canSelect,
       pptcolor: pptcolor,
       solcolor: solcolor,
+      ppt: pptname,
+      sol: solname,
       reaproAmount: this.reaproAmount(chosenrr),
       reaproAmountState: null,
     };
@@ -385,12 +403,10 @@ class Main extends React.Component {
   }
 
   debug = () => {
+    console.log('this.state.pptsol: ', this.state.ppt, this.state.sol);
     if (false && this.state.chosenrr) {
       console.log('debug: rA: ', this.reaproAmount(this.state.chosenrr));
     }
-//    this.testltx(); return;
-//    console.log('debug: ', this.state.chosenrr);
-    return;
     if (!(this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea])) {
       console.log('debug: false');
       return;
@@ -410,8 +426,12 @@ class Main extends React.Component {
     ["this.state.pro2", this.state.pro2],
     ["rrcare.pro3", rrcare.pro3],
     ["this.state.pro3", this.state.pro3],
-    ["rrcare.ppt", rrcare.ppt],
+    ["rrcare.ppt", rrcare.ppt ? rrcare.ppt : false],
     ["this.state.ppt", this.state.ppt],
+    ["ppt === ppt", rrcare.ppt ===  this.state.ppt],
+    ["rrcare.sol", rrcare.sol],
+    ["this.state.sol", this.state.sol],
+    ["sol === sol", rrcare.sol ===  this.state.sol],
     ["[ipro[this.state.pro][color]", (this.state.pro ? this.state.ipro[this.state.pro]["color"] : null)],
     ["colors[ipro[this.state.pro][color]", (this.state.pro ? colors[this.state.ipro[this.state.pro]["color"]].shades : null)],
     ];
@@ -451,12 +471,12 @@ class Main extends React.Component {
 
   setPPT = (color) => {
 //    console.log("setPPT: ", color);
-    this.setState({pptcolor: color});
+    this.setState({ppt: color});
   }
 
   setSOL = (color) => {
 //    console.log("setSOL: ", color);
-    this.setState({solcolor: color});
+    this.setState({sol: color});
   }
   
   reaproAmount = (rr) => {
@@ -483,11 +503,14 @@ class Main extends React.Component {
 //  const allreactions = () => {
   reveal = () => {
     const rr = this.makeMjrr(this.state.chosenrr);
+    const ps = this.makeMjps(this.state.chosenrr);
+    const body = <div>{rr}{ps}</div>
     return (
       <div className="rrButton">
         <Window
           name={'Revelar'}
           body={rr}
+          footer={ps}
           size={this.state.reaproAmount > 4}
           clickable={true}
           callback={() => {}}
@@ -515,24 +538,11 @@ class Main extends React.Component {
         return rpltx(this.state[x], source);
       }
       const options = Object.keys(source).map((xx) => ({value: xx, label: rpltx(xx, source)}));
-//      const value = (this.state[x] ? options.find(({value, label}) => value === this.state[x]) : null);
-//      const valuex = (this.state[x] ? {"value": this.state[x], "label": ltx(this.state[x])} : null);
-      if (false && this.state[x]) {
-        console.log('x: ', x);
-        console.log('state[x]: ', this.state[x]);
-        console.log('source: ', source);
-        console.log('options: ', options);
-//        console.log('reapro: value: ', valuex);
-      }
-//      return (ltx(this.state[x]));
       return (
         <Reapro
-//          value={options.find((x) => x.value === this.state[x])}
           key={x + this.state.reset}
-//          valuex={valuex}
           source={source}
           callback={setx}
-//          options={Object.keys(source).map((x) => ({value: x, label: rpltx(x, source)}))}
           options={options}
         />
       );
@@ -548,29 +558,47 @@ class Main extends React.Component {
       );
     };
 
-    const pptsol = () => {
+    const pptcp = () => {
+      if (!this.state.canSelect["ppt"]) {
+        return <div>{this.displaypptsol(false, this.state.ppt)}</div>;
+      }
       return (
-        <div className="pptsol">
-          {true ? 
+          (true ? 
           <ColorPicker
             key={"PPT" + this.state.reset}
             name={"PPT"}
             callback={(color) => this.setPPT(color)}
             color={this.state.pptcolor}
-            pptsol={this.state.ppt}
+            pptsolname={this.state.ppt}
             disabled={!this.state.canSelect.ppt}
           />
-          : null}
-          {(this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea] && rrs[this.state.ion][this.state.rea]["sol"])
+          : null)
+      );
+    }
+    
+    const solcp = () => {
+      if (!this.state.canSelect["sol"]) {
+        return <div>{this.displaypptsol(true, this.state.sol)}</div>;
+      }
+      return (
+          (true && (this.state.ion && this.state.rea && rrs[this.state.ion][this.state.rea] && rrs[this.state.ion][this.state.rea]["sol"])
           ? <ColorPicker
               key={"SOL" + this.state.reset}
               name={"SOL"}
               callback={(color) => this.setSOL(color)}
               color={this.state.solcolor}
-              pptsol={this.state.sol}
+              pptsolname={this.state.sol}
               disabled={!this.state.canSelect.sol}
             />
-          : null}
+          : null)
+      );
+    }
+
+    const pptsol = () => {
+      return (
+        <div className="pptsol">
+          {pptcp()}
+          {solcp()}
         </div>
       );
     }
@@ -601,6 +629,7 @@ class Main extends React.Component {
             title={this.state.reaction}
             callback={() => this.reset()}
             mjrr={this.state.mjrr}
+            mjps={this.state.mjps}
             size={this.state.reaproAmountState && this.state.reaproAmountState > 4}
           />
         </div>
@@ -610,7 +639,7 @@ class Main extends React.Component {
     const debugButtons = () => {
       return (
         <div className="buttons">
-          {false
+          {true
           ? <Button onClick={() => this.debug()}>
               {'Debug'}
             </Button>

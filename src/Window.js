@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import "./Main.css"
 
 function Window(props) {
   const [show, setShow] = useState(props.show ? props.show : false);
@@ -33,7 +34,8 @@ function Window(props) {
           <Modal.Body>
             {props.body}
           </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer class="modal-footer justify-content-between">
+            {props.footer}
           <Button variant="primary" onClick={onClickPrimary}>Cerrar</Button>
         </Modal.Footer>
       </Modal>

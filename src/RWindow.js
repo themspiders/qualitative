@@ -39,9 +39,12 @@ function Window(props) {
             {props.mjrr}
           </Modal.Body>
         : null}
-        <Modal.Footer>
-          {props.secondary ? <Button variant="secondary" onClick={handleClose}>Intentar de nuevo</Button> : null}
-          <Button variant="primary" onClick={onClickPrimary}>Siguiente reacción</Button>
+        <Modal.Footer class="modal-footer justify-content-between">
+          {props.mjrr ? props.mjps : null}
+          <div className="footerButtons">
+            {props.secondary ? <Button variant="secondary" onClick={handleClose}>Reintentar</Button> : null}
+           <Button variant="primary" onClick={onClickPrimary}>Siguiente</Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </>

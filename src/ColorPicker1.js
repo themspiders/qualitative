@@ -2,7 +2,7 @@ import "./Main.css";
 import { useState } from "react";
 import { BlockPicker, CirclePicker } from "react-color";
 import Button from "react-bootstrap/Button";
-import { colors, whitecolor, colorless, nopptName, nopptColor, getNamesFromColor, doColorName, doColorNames } from "./colors.js";
+import { colors, whitecolor, colorless, noppt, getNamesFromColor, doColorName, doColorNames } from "./colors.js";
 import Select from "react-dropdown-select";
 
 function ColorPicker(props) {
@@ -15,36 +15,14 @@ function ColorPicker(props) {
     y.forEach((c) => {return x.includes(c) ? x : x.push(c)})
     return x;
   }, []);
-
-  const header = (content) => {
-    return (
-      <h6 style={{"user-select": "none"}}>{content}</h6>
-    );
-  };
-
-  const placeHolder = (props.name === "PPT" ? "Precipitado..." : "Solucion...");
-
-  const makeLabel = (color) => {
-    return (
-      <div style={{color: colors[color].default}}>
-        {doColorName(color)}
-      </div>
-    );
-  }
-
-  const makeOption = (x) => {
-    return ({value: x, label: makeLabel(x)});
-  }
-
-  const options = Object.keys(colors).map((x) => (makeOption(x)));
-  const toRemove = (props.name === "PPT" ? colorless : (props.name === "SOL" ? nopptColor : null));
+  
+  const toRemove = (props.name === "PPT" ? colorless : (props.name === "SOL" ? noppt : null));
   if (toRemove) {
-    const index = options.indexOf(toRemove);
+    const index = circleColors.indexOf(toRemove);
       if (index > -1) {
-        options.splice(index, 1);
+        circleColors.splice(index, 1);
     }
   };
-
   
   const defColor = whitecolor;
   const [color, setColor] = useState(defColor);
@@ -54,7 +32,7 @@ function ColorPicker(props) {
     return (
       color === colorless
       ? "INCOLORO"
-      : (color === nopptColor
+      : (color === noppt
         ? "SIN PPT"
         : (color === whitecolor
           ? (props.name === "PPT"
@@ -69,8 +47,8 @@ function ColorPicker(props) {
 
   const title = (color) => {
     let ret = "";
-    if (props.disabled && props.pptsolname) {
-      ret = doColorName(props.pptsolname);
+    if (props.disabled && props.pptsol) {
+      ret = doColorName(props.pptsol);
       return ret;
     }
     ret = doColorNames(getNamesFromColor(color));
@@ -99,7 +77,7 @@ function ColorPicker(props) {
   };
 
   const blackhex = {
-    "PPT": nopptColor,
+    "PPT": noppt,
     "SOL": colorless,
   };
 
@@ -107,7 +85,7 @@ function ColorPicker(props) {
     const blocks = {
       [whitecolor]: defBlock,
       [colorless]: defBlock,
-      [nopptColor]: defBlock,
+      [noppt]: defBlock,
       "default": defBlock,
       "color": {
         "backgroundColor": color,
@@ -145,7 +123,7 @@ function ColorPicker(props) {
       ? "white-selected"
       : (color === colorless
         ? "colorless-selected"
-        : (color === nopptColor
+        : (color === noppt
           ? "noppt-selected" 
           : ""
           )
@@ -153,15 +131,58 @@ function ColorPicker(props) {
     );
   };
   
+  const header = (content) => {
+    return (
+      <h6 style={{"user-select": "none"}}>{content}</h6>
+    );
+  };
+
+  const makeLabel = (color) => {
+    return (
+      <div style={{color: colors[color].default}}>
+        {doColorName(color)}
+      </div>
+    );
+  }
+
+  const options = Object.keys(colors).map((x) => ({value: x, label: makeLabel(x)}));
+
     return (
       <Select 
         options={options}
-        onChange={(select) => onChange(select[0] ? select[0].value : null)}
-        placeholder={placeHolder}
+        onChange={(select) => onChange(color)}
+//        values={(this.props.values ? this.tovl(this.props.values) : [])}
+//        values={[{value: this.props.value, label: this.props.value}]} 
       />
   );
-//        values={props.pptsolname ? [makeOption(props.pptsolname)] : []}
 
+  return (
+    <div className="colorpicker">
+    {header(props.name)}
+    <div className="circlepicker">
+      <Button variant="primary"
+        style={blockStyle(props.color)}
+        className={btnClassName(props.color)}
+        onClick={handleShow}
+        disabled={props.disabled}
+      >
+        {title(props.color)}
+      </Button>
+      {show ?
+        <CirclePicker
+          className={cpClassName(props.color)}
+          circleSize={24}
+          circleSpacing={10}
+          color={color}
+          onChange={(color) => {
+            onChange(onChangeProp(color));
+          }}
+          colors={circleColors}
+        />
+      : null}
+    </div>
+    </div>
+  );
 }
 
 export default ColorPicker;
