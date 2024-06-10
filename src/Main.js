@@ -638,7 +638,7 @@ class Main extends React.Component {
             callback={() => this.reset()}
             mjrr={() => (this.state.mjrr)}
             mjps={() => (this.state.mjps)}
-            scheme={() => (this.state.reaction)}
+            schema={() => (this.state.reaction)}
             size={() => (this.state.reaproAmountState && this.state.reaproAmountState > 3)}
           />
         </div>
