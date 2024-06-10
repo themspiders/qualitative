@@ -47,7 +47,6 @@ function ColorPicker(props) {
   const title = (color) => {
     let ret = "";
     if (props.disabled && props.pptsol) {
-      console.log('props.pptsol: ', props.pptsol);
       ret = doColorName(props.pptsol);
       return ret;
     }
@@ -94,8 +93,8 @@ function ColorPicker(props) {
         "min-width": "auto",
       },
     };
-    console.log('blockStyle: ', color);
-    console.log(props.name, color ? (blocks[color] ? blocks[color] : blocks["color"]) : blocks["default"]);
+//    console.log('blockStyle: ', color);
+//    console.log(props.name, color ? (blocks[color] ? blocks[color] : blocks["color"]) : blocks["default"]);
     return (
       color
       ? (blocks[color]

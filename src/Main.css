@@ -127,6 +127,28 @@
   margin-bottom: 5%;
 }
 
+.bottomright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  gap: 30px;
+  bottom: 0;
+  right: 0;
+  margin-right: 2%;
+  margin-bottom: 2%;
+}
+
+.displaypptsol {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  gap: 30px;
+}
+
 .colorpicker {
   display: flex;
   justify-content: space-between;

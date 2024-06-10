@@ -15,8 +15,6 @@ class Reapro extends React.Component {
   }
 
   setReapro(select) {
-    console.log('select: ', select);
-    console.log('values: ', this.props);
     this.reapro = (select[0] ? select[0].value : null);
     this.callback(this.reapro);
   }

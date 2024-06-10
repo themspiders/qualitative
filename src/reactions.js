@@ -111,7 +111,7 @@ const rrssrc = {
   },
   //cu2+
   'i-': {
-    ltx: '{{I^{-}}_{(ac}}',
+    ltx: '{{I^{-}}_{(ac)}}',
     color: 'incoloro',
   },
   'zn': {
@@ -708,9 +708,11 @@ const cationrrs = {
     },
   },
   'cro2-': {
+    /*
     'o2': {
       pro: 'X',
     },
+    */
     'h2o2': {
       sol: 'amarillo',
       ppt: false,
@@ -734,9 +736,11 @@ const cationrrs = {
       pro2: 'ho-',
       coef: {'cr(oh)3': 1, 'nh3exc': 6, '[cr(nh3)6]3+': 1, 'ho-': 3},
     },
+    /*
     'o2': {
       pro: 'X',
     },
+    */
     'h2o2': {
       pro: 'cro42-',
       ppt: false,
@@ -747,9 +751,11 @@ const cationrrs = {
     },
   },
   'cr(oh)4-': {
+    /*
     'o2': {
       pro: 'X',
     },
+    */
     'h2o2': {
       pro: 'cro42-',
       ppt: false,
@@ -1212,28 +1218,28 @@ const cationrrs = {
     'ho-': {
       pro: 'ag2o',
       ppt: true,
-      sol: 'marron',
+      sol: null,
       pro2: 'h2o',
       coef: {'ag+': 2, 'ho-': 2, 'ag2o': 1, 'h2o': 1},
     },
     'ho-exc': {
       pro: 'ag2o',
       ppt: true,
-      sol: 'marron',
+      sol: null,
       pro2: 'h2o',
       coef: {'ag+': 2, 'ho-exc': 2, 'ag2o': 1, 'h2o': 1},
     },
     'nh3': {
       pro: 'ag2o',
       ppt: true,
-      sol: 'marron',
+      sol: null,
       rea2: 'h2o',
       pro2: 'nh4+',
       coef: {'ag+': 2, 'nh3': 2, 'h2o': 2, 'ag2o': 1, 'nh4+': 2},
     },
     'nh3exc': {
       pro: '[ag(nh3)2]+',
-      ppt: true,
+      ppt: false,
       sol: 'incoloro',
       rea2: 'h2o',
       pro2: 'ho-',
@@ -1655,9 +1661,11 @@ const anionrrs = {
       sol: null,
       coef: {'aso43-': 2, 'ca2+': 3, 'ca3(aso4)2': 1},
     },
+    /*
     'al3+': {
       pro: 'X',
     },
+    */
     'nh4+': {
       pro: 'mgnh4po4',
       ppt: true,

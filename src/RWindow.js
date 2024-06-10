@@ -4,21 +4,23 @@ import Modal from "react-bootstrap/Modal";
 
 function Window(props) {
   const [show, setShow] = useState(false);
+
   const handleClose = (() => setShow(false));
   const handleShow = () => {
+    props.onClick();
     setShow(true);
   }
+  
   const onClickPrimary = () => {
-    props.callback && props.callback();
+    props.callback();
     setShow(false);
   }
+
   return (
     <>
-      {props.clickable
-      ? <Button variant="primary" onClick={handleShow}>
-          {props.name}
-        </Button>
-      : null}
+      <Button variant="primary" onClick={handleShow}>
+        {props.name}
+      </Button>
       <Modal
         show={show}
         onHide={handleClose}
@@ -28,13 +30,18 @@ function Window(props) {
         size={props.size ? "lg" : null}
       >
         <Modal.Header>
-          <Modal.Title>{props.title}</Modal.Title>
+          <Modal.Title>{props.title ? 'Correcto!' : 'Incorrecto!'}</Modal.Title>
         </Modal.Header>
+        {props.mjrr ?
           <Modal.Body>
-            {props.body}
+            <h4>{'Reacción balanceada:'}</h4>
+            <br></br>
+            {props.mjrr}
           </Modal.Body>
+        : null}
         <Modal.Footer>
-          <Button variant="primary" onClick={onClickPrimary}>Cerrar</Button>
+          {props.secondary ? <Button variant="secondary" onClick={handleClose}>Intentar de nuevo</Button> : null}
+          <Button variant="primary" onClick={onClickPrimary}>Siguiente reacción</Button>
         </Modal.Footer>
       </Modal>
     </>

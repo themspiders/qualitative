@@ -67,6 +67,10 @@ const colors = {
     shades: ['#fcdc00'],
     display: 'amarillo',
   },
+  'naranja': {
+    shades: ['#ffa500'],
+    display: 'naranja',
+  },
   'blanco': {
     shades: [whitecolor],
     display: 'blanco',
@@ -86,13 +90,12 @@ const getNamesFromColor = (color) => {
 };
 
 const doColorName = (color) => {
-  console.log('doColorName: ', color);
 //  return (color.toUpperCase().replace('_', ' '));
+  console.log('doColorNames: ', color);
   return (colors[color] ? colors[color].display : '');
 }
 
 const doColorNames = (colorsArr) => {
-  console.log('doColorNames: ', colorsArr);
   return colorsArr.reduce((a, x) => (a === "" ? a : a + "/") + doColorName(x), "");
 };
 
