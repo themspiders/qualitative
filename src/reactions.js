@@ -1709,6 +1709,15 @@ const anionrrs = {
       pro3: 'ho-',
       coef: {'mno4-': 1, 'fe(oh)2': 3, 'h2o': 2, 'mno2': 1, 'fe(oh)3': 3, 'ho-': 1},
     },
+    'h2o2': {
+      pro: 'mn2+',
+      ppt: false,
+      sol: 'rosado',
+      rea2: 'h+',
+      pro2: 'o2',
+      pro3: 'h2o',
+      coef: {'mno4-': 2, 'h+': 6, 'h2o2': 5, 'mn2+': 2, 'o2': 5, 'h2o': 8},
+    },
   },
   //cr2o72-
   'cr2o72-': {
@@ -1724,6 +1733,15 @@ const anionrrs = {
       ppt: false,
       sol: 'naranja',
       coef: {'cr2o72-': 1, 'ba2+': 1, 'bacr2o72-': 1},
+    },
+    'h2o2': {
+      pro: 'cr3+',
+      ppt: false,
+      sol: 'verde',
+      rea2: 'h+',
+      pro2: 'o2',
+      pro3: 'h2o',
+      coef: {'cr2o72-': 1, 'h+': 8, 'h2o2': 3, 'cr3+': 2, 'o2': 3, 'h2o': 7},
     },
   },
   //cro42-
