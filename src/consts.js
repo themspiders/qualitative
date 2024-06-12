@@ -12,7 +12,7 @@ export const initText1 = "\
 ;
 
 export const initText = "\
-  verificar con Revelar si las reacciones están bien hechas\
+  \"Todo\" muestra todas las reacciones (al apretar el boton, esperar un toque que carguen)\
   "
 ;
 

@@ -10,11 +10,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 document.title = "Analisis Qualitativo";
 root.render(
   <React.StrictMode>
-    {false ?
+    {true ?
       <Window
         callback={() => {}}
-        title={initTitle}
-//        body={initText}
+//        title={initTitle}
+        body={initText}
         clickable={false}
         show={true}
       >
