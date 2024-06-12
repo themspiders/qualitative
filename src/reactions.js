@@ -259,7 +259,7 @@ const rrssrc = {
     color: 'amarillo',
   },
   'kfe[fe(cn)6]': {
-    ltx: '{{{Fe[Fe(CN)6]}^{-}}_{(s)}}',
+    ltx: '{{KFe[Fe(CN)6]}_{(s)}}',
     color: 'azul',
   },
   'k+': {
