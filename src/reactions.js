@@ -1080,7 +1080,7 @@ const cationrrs = {
     },
   },
   'ni(oh)2': {
-    'nh3': {
+    'nh3exc': {
       pro: '[ni(nh3)6]2+',
       ppt: false,
       sol: 'azul',
