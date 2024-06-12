@@ -132,6 +132,52 @@ overflow-x: hidden;
   margin-bottom: 5%;
 }
 
+.columnFlow {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rowFlow {
+  display: flex;
+  flex-direction: row;
+  margin-left: 5%;
+  gap: 0px;
+}
+
+.pptsolFlow {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  font-size: 0.9em;
+  gap: -5px;
+}
+
+.pptsolFlow2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 5px;
+  font-size: 0.9em;
+  gap: -5px;
+}
+
+.allFlows {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.flowsButton {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 5%;
+  margin-right: 5%;
+}
+
 .bottomright {
   user-select: none;
   display: flex;

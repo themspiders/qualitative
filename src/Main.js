@@ -9,6 +9,7 @@ import { colors, nopptName, nopptColor, doColorName } from "./colors.js";
 import Button from "react-bootstrap/Button";
 import Window from "./Window.js";
 import { bottomright } from "./consts.js";
+import Divider from '@mui/material/Divider';
 
 const config = {
   tex: {
@@ -388,6 +389,7 @@ class Main extends React.Component {
       sol: solname,
       reaproAmount: this.reaproAmount(chosenrr),
       reaproAmountState: null,
+      mainScreen: true,
     };
   }
 
@@ -527,6 +529,107 @@ class Main extends React.Component {
     );
   }
 
+  makeFlow = (ion) => {
+    const ltx = (x) => {
+      return (
+        <MathJax inline dynamic>
+          {`$${x}$`}
+        </MathJax>
+      );
+    };
+    const removeAggr = (x) => {
+      let ret = x;
+      ['_{(ac)}', '_{(s)}','_{(l)}', '_{(g)}'].forEach((ag) => {ret = ret.replace(ag, '')});
+      console.log(ret);
+      return ret;
+    };
+    const ltxflow = (r1, r2, p1, second) => {
+      return (
+        <MathJax inline dynamic>
+          {!second
+           ? `$+ ~ ${r1} ~ \\xrightarrow{} ~ ${p1}$`
+           : `$~ \\xrightarrow{${removeAggr(r2)}} ~ ${p1}$`
+           }
+        </MathJax>
+      );
+    };
+    const xtl = (x) => {
+      return rrssrc[x]['ltx'];
+    };
+    const recursive = (x, obj, second = false) => {
+      obj[x] = true;
+      console.log('x: ', x, second);
+      const fs = [];
+      for (let rea in rrs[x]) {
+        const pro = rrs[x][rea].pro;
+        let f = [];
+        if (!second) {
+          f = [ltxflow(xtl(rea), null, xtl(pro), false)];
+        } else {
+          f = [ltxflow(null, xtl(rea), xtl(pro), true)];
+        }
+        const doRecursive = (!second && rrs[pro] && !obj[pro]);
+        const ppt = (rrs[x][rea].ppt ? rrssrc[rrs[x][rea].pro].color : 'noppt');
+        const sol = rrs[x][rea].sol;
+        const pptsol = (
+          <div className={doRecursive ? "pptsolFlow" : "pptsolFlow2"}>
+            {this.displaypptsol(false, ppt)}
+            {this.displaypptsol(true, sol)}
+          </div>
+        );
+        f.push(pptsol);
+        let pf = null;
+        if (doRecursive) {
+          pf = recursive(pro, obj, true);
+          f.push(pf);
+        }
+        fs.push(f);
+      }
+      const row = (f) => {
+        return (
+        <div className="rowFlow">
+          {f}
+        </div>
+        );
+      };  
+      return (
+        <div className="columnFlow">
+          {fs.map((x) => row(x))}
+        </div>
+      );
+    };
+    return (
+      <MathJaxContext version={3} config={config}>
+        <div className="rowFlow">
+          {ltx(rrssrc[ion].ltx)}
+          {recursive(ion, {})}
+        </div>
+      </MathJaxContext>
+    );
+  }
+  
+  makeAllFlows = () => {
+    console.log('makeAllFlows');
+    const allFlows = Object.keys(rrs).map((x) => this.makeFlow(x));
+    this.setState({allFlows: allFlows});
+    return allFlows;
+  }
+  
+  allFlows = () => {
+    const allFlows = (this.state.allFlows ? this.state.allFlows : this.makeAllFlows());
+    console.log('allFlows: ', allFlows);
+    return (
+      <div className="allFlows">
+        {allFlows ? allFlows.map((x) =>
+          <div className="allFlows">
+            {x}
+            {<Divider style={{ background: 'black' }}></Divider>}
+          </div>)
+        : null}
+      </div>
+    );
+  }
+
   render() {
     const ltx = (x) => {
       return (
@@ -662,24 +765,41 @@ class Main extends React.Component {
         </div>
       );
     }
+    
+    const flowsButton = () => {
+      return (
+        <div className="flowsButton">
+          <Button onClick={() => this.setState({mainScreen: !this.state.mainScreen})}>
+            {this.state.mainScreen ? 'Todo' : 'Volver'}
+          </Button>
+        </div>
+      );
+    }
 
     return (
+    (this.state.mainScreen ?
       <div>
-      <MathJaxContext version={3} config={config}>
-      <div className="center">
-        <div className="allreaction">
-          {reaction()}
+        {flowsButton()}
+        {debugButtons()}
+        <MathJaxContext version={3} config={config}>
+        <div className="center">
+          <div className="allreaction">
+            {reaction()}
+          </div>
+          {pptsol()}
+          {rrButton()}
         </div>
-        {pptsol()}
-        {rrButton()}
+        </MathJaxContext>
+        <div className="bottomright">
+          {bottomright}
+        </div>
       </div>
-      </MathJaxContext>
-      {debugButtons()}
-      <div className="bottomright">
-        {bottomright}
+    :
+      <div>
+        {flowsButton()}
+        {this.allFlows()}
       </div>
-      </div>
-    );
+    ));
   }
 }
 

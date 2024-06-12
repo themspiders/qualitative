@@ -192,7 +192,7 @@ const rrssrc = {
     color: 'verde',
   },
   '[cr(nh3)6]3+': {
-    ltx: '{{[Cr{(NH_{3})}_{6}]}_{(ac)}}',
+    ltx: '{{{[Cr{(NH_{3})}_{6}]}^{3+}}_{(ac)}}',
     color: 'malva',
   },
   //mn2+
@@ -714,9 +714,9 @@ const cationrrs = {
     },
     */
     'h2o2': {
-      sol: 'amarillo',
-      ppt: false,
       pro: 'cro42-',
+      ppt: false,
+      sol: 'amarillo',
       rea2: 'ho-',
       pro2: 'h2o',
       coef: {'cro2-': 2, 'h2o2': 3, 'ho-': 2, 'cro42-': 2, 'h2o': 4}
