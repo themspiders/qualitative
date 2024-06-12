@@ -1858,10 +1858,10 @@ const anionrrs = {
   //so32-
   'so32-': {
     'h+': {
-      pro: 'hso4-',
+      pro: 'hso3-',
       ppt: false,
       sol: 'incoloro',
-      coef: {'so32-': 1, 'h+': 1, 'hso4-': 1},
+      coef: {'so32-': 1, 'h+': 1, 'hso3-': 1},
     },
     'ag+': {
       pro: 'ag2so3',
