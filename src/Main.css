@@ -150,7 +150,7 @@ overflow-x: hidden;
   flex-direction: column;
   margin-left: 5px;
   font-size: 0.9em;
-  gap: -5px;
+  white-space: nowrap;
 }
 
 .pptsolFlow2 {
@@ -159,7 +159,7 @@ overflow-x: hidden;
   justify-content: center;
   margin-left: 5px;
   font-size: 0.9em;
-  gap: -5px;
+  white-space: nowrap;
 }
 
 .allFlows {
@@ -169,9 +169,22 @@ overflow-x: hidden;
   margin-top: 10px;
 }
 
-.flowsButton {
+.flowsButtons {
   display: flex;
   position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 5%;
+  margin-left: 5%;
+}
+
+.flowsButtons2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  gap: 10px;
   top: 0;
   right: 0;
   margin-top: 5%;

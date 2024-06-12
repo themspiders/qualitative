@@ -390,6 +390,7 @@ class Main extends React.Component {
       reaproAmount: this.reaproAmount(chosenrr),
       reaproAmountState: null,
       mainScreen: true,
+      flowsToggle: false,
     };
   }
 
@@ -608,24 +609,42 @@ class Main extends React.Component {
     );
   }
   
-  makeAllFlows = () => {
+  makeAllFlows = (toggle) => {
     console.log('makeAllFlows');
-    const allFlows = Object.keys(rrs).map((x) => this.makeFlow(x));
-    this.setState({allFlows: allFlows});
-    return allFlows;
+    const cationflows = Object.keys(cationrrs).map((x) => this.makeFlow(x));
+    const anionflows = Object.keys(anionrrs).map((x) => this.makeFlow(x));
+    this.setState({allFlows: {cations: cationflows, anions: anionflows}});
+    return (!toggle ? cationflows : anionflows);
   }
   
   allFlows = () => {
-    const allFlows = (this.state.allFlows ? this.state.allFlows : this.makeAllFlows());
+    const allFlows = (
+      this.state.allFlows
+        ? this.state.allFlows[!this.state.flowsToggle ? "cations" : "anions"]
+        : this.makeAllFlows(this.state.flowsToggle)
+    );
     console.log('allFlows: ', allFlows);
     return (
-      <div className="allFlows">
-        {allFlows ? allFlows.map((x) =>
-          <div className="allFlows">
-            {x}
-            {<Divider style={{ background: 'black' }}></Divider>}
-          </div>)
-        : null}
+      <div>
+        <div className="flowsButtons2">
+          <Button onClick={() => this.setState({flowsToggle: false})}>
+            {'Cationes'}
+          </Button>
+          <Button onClick={() => this.setState({flowsToggle: true})}>
+            {'Aniones'}
+          </Button>
+          <Button onClick={() => this.setState({mainScreen: true})}>
+            {'Volver'}
+          </Button>
+        </div>
+        <div className="allFlows">
+          {allFlows ? allFlows.map((x) =>
+            <div className="allFlows">
+              {x}
+              {<Divider style={{ background: 'black' }}></Divider>}
+            </div>)
+          : null}
+        </div>
       </div>
     );
   }
@@ -766,11 +785,11 @@ class Main extends React.Component {
       );
     }
     
-    const flowsButton = () => {
+    const flowsButtons = () => {
       return (
-        <div className="flowsButton">
-          <Button onClick={() => this.setState({mainScreen: !this.state.mainScreen})}>
-            {this.state.mainScreen ? 'Todo' : 'Volver'}
+        <div className="flowsButtons">
+          <Button onClick={() => this.setState({mainScreen: false})}>
+            {'Todo'}
           </Button>
         </div>
       );
@@ -779,7 +798,7 @@ class Main extends React.Component {
     return (
     (this.state.mainScreen ?
       <div>
-        {flowsButton()}
+        {flowsButtons()}
         {debugButtons()}
         <MathJaxContext version={3} config={config}>
         <div className="center">
@@ -796,7 +815,6 @@ class Main extends React.Component {
       </div>
     :
       <div>
-        {flowsButton()}
         {this.allFlows()}
       </div>
     ));

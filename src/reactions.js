@@ -202,15 +202,15 @@ const rrssrc = {
   },
   'mn2o3.nh2o': {
     ltx: '{{{{Mn}_{2}O_{3}}.{nH_{2}O}}_{(s)}}',
-    color: 'pardo',
+    color: 'marron',
   },
   'mn2o3': {
     ltx: '{{{Mn}_{2}O_{3}}_{(s)}}',
-    color: 'pardo',
+    color: 'marron',
   },
   'mno(oh)2': {
     ltx: '{{MnO{(OH)}_{2}}_{(s)}}',
-    color: 'pardo',
+    color: 'marron',
   },
   'mno2': {
     ltx: '{{MnO_{2}}_{(s)}}',
@@ -812,14 +812,14 @@ const cationrrs = {
     'o2': {
       pro: 'mn2o3',
       ppt: true,
-      sol: 'pardo',
+      sol: 'marron',
       pro2: 'h2o',
       coef: {'mn(oh)2': 4, 'o2': 1, 'mn2o3': 2, 'h2o': 4},
     },
     'h2o2': {
       pro: 'mno2',
       ppt: true,
-      sol: 'pardo',
+      sol: 'marron',
       pro2: 'h2o',
       coef: {'mn(oh)2': 1, 'h2o2': 1, 'mno2': 1, 'h2o': 2},
     },
@@ -2030,4 +2030,4 @@ const rrs = {
   ...anionrrs,
 }
 
-export { rrssrc, cationrrs, rrs };
+export { rrssrc, cationrrs, anionrrs, rrs };
