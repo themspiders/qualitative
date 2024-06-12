@@ -1772,6 +1772,16 @@ const anionrrs = {
       coef: {'cro42-': 1, 'pb2+': 1, 'pbcro4': 1},
     },
   },
+  'bacro4': {
+    'h+': {
+      pro: 'cr2o72-',
+      ppt: false,
+      sol: 'naranja',
+      pro2: 'ba2+',
+      pro3: 'h2o',
+      coef: {'bacro4': 2, 'h+': 2, 'ba2+': 2, 'cr2o72-': 1, 'h2o': 1},
+    },
+  },
   'ag2cro4': {
     'nh3': {
       pro: '[ag(nh3)2]+',
