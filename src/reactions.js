@@ -255,8 +255,8 @@ const rrssrc = {
     color: 'pardo',
   },
   '[fe(cn)6]3-': {
-    ltx: '{{{Fe{(CN)}_{6}}^{3-}}_{(ac)}}',
-    color: 'amarillo',
+    ltx: '{{{[Fe{(CN)}_{6}]}^{3-}}_{(ac)}}',
+    color: 'pardo',
   },
   'kfe[fe(cn)6]': {
     ltx: '{{KFe[Fe(CN)6]}_{(s)}}',
@@ -966,7 +966,7 @@ const cationrrs = {
     'cn-': {
       pro: '[fe(cn)6]3-',
       ppt: false,
-      sol: 'amarillo',
+      sol: 'pardo',
       coef: {'fe(cn)3': 1, 'cn-': 3, '[fe(cn)6]3-': 1},
     },
   },
