@@ -491,7 +491,7 @@ const rrssrc = {
     color: 'blanco',
   },
   '[al(oh)4-]': {
-    ltx: '{{{{Al{(OH)}_{4}}}^{-}}_{(s)}}',
+    ltx: '{{{[{Al{(OH)}_{4}}]}^{-}}_{(ac)}}',
     color: 'incoloro',
   },
   'cl-': {
