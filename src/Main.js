@@ -770,6 +770,9 @@ class Main extends React.Component {
     const debugButtons = () => {
       return (
         <div className="buttons">
+          <Button onClick={() => this.setState({mainScreen: false})}>
+            {'Todo'}
+          </Button>
           {false
           ? <Button onClick={() => this.debug()}>
               {'Debug'}
@@ -798,7 +801,6 @@ class Main extends React.Component {
     return (
     (this.state.mainScreen ?
       <div>
-        {flowsButtons()}
         {debugButtons()}
         <MathJaxContext version={3} config={config}>
         <div className="center">
