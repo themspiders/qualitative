@@ -527,6 +527,16 @@ class Main extends React.Component {
       </div>
     );
   }
+  
+  medium = (rr) => {
+    return (
+      rr.rea2 === 'h+' || rr.rea3 === 'h+'
+      ? 'h+'
+      : (rr.rea2 === 'ho-' || rr.rea3 === 'ho-'
+        ? 'ho-'
+        : '')
+    );
+  }
 
   makeFlow = (ion) => {
     const ltx = (x) => {
@@ -542,11 +552,11 @@ class Main extends React.Component {
       console.log(ret);
       return ret;
     };
-    const ltxflow = (r1, r2, p1, second) => {
+    const ltxflow = (r1, r2, p1, second, medium = '') => {
       return (
         <MathJax inline dynamic>
           {!second
-           ? `$+ ~ ${r1} ~ \\xrightarrow{} ~ ${p1}$`
+           ? `$+ ~ ${r1} ~ \\xrightarrow{${medium}} ~ ${p1}$`
            : `$~ \\xrightarrow{${removeAggr(r2)}} ~ ${p1}$`
            }
         </MathJax>
@@ -563,7 +573,8 @@ class Main extends React.Component {
         const pro = rrs[x][rea].pro;
         let f = [];
         if (!second) {
-          f = [ltxflow(xtl(rea), null, xtl(pro), false)];
+          const medium = (this.medium(rrs[x][rea]) ? removeAggr(xtl(this.medium(rrs[x][rea]))) : '');
+          f = [ltxflow(xtl(rea), null, xtl(pro), false, medium)];
         } else {
           f = [ltxflow(null, xtl(rea), xtl(pro), true)];
         }
@@ -586,7 +597,7 @@ class Main extends React.Component {
       }
       const row = (f) => {
         return (
-        <div className="rowFlow">
+        <div className="rowFlow2">
           {f}
         </div>
         );
