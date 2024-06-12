@@ -553,11 +553,12 @@ class Main extends React.Component {
       return ret;
     };
     const ltxflow = (r1, r2, p1, second, medium = '') => {
+    const mediumPlusRea = (second ? (medium ? medium + ', ~' + removeAggr(r2) : removeAggr(r2)) : '');
       return (
         <MathJax inline dynamic>
           {!second
            ? `$+ ~ ${r1} ~ \\xrightarrow{${medium}} ~ ${p1}$`
-           : `$~ \\xrightarrow{${removeAggr(r2)}} ~ ${p1}$`
+           : `$~ \\xrightarrow{${mediumPlusRea}} ~ ${p1}$`
            }
         </MathJax>
       );
@@ -565,20 +566,20 @@ class Main extends React.Component {
     const xtl = (x) => {
       return rrssrc[x]['ltx'];
     };
-    const recursive = (x, obj, second = false) => {
+    const recursive = (x, obj, second = false, depth) => {
       obj[x] = true;
       console.log('x: ', x, second);
       const fs = [];
       for (let rea in rrs[x]) {
         const pro = rrs[x][rea].pro;
         let f = [];
+        const medium = (this.medium(rrs[x][rea]) ? removeAggr(xtl(this.medium(rrs[x][rea]))) : '');
         if (!second) {
-          const medium = (this.medium(rrs[x][rea]) ? removeAggr(xtl(this.medium(rrs[x][rea]))) : '');
           f = [ltxflow(xtl(rea), null, xtl(pro), false, medium)];
         } else {
-          f = [ltxflow(null, xtl(rea), xtl(pro), true)];
+          f = [ltxflow(null, xtl(rea), xtl(pro), true, medium)];
         }
-        const doRecursive = (!second && rrs[pro] && !obj[pro]);
+        const doRecursive = (rrs[pro] && !obj[pro] && depth < 3);
         const ppt = (rrs[x][rea].ppt ? rrssrc[rrs[x][rea].pro].color : 'noppt');
         const sol = rrs[x][rea].sol;
         const pptsol = (
@@ -590,7 +591,7 @@ class Main extends React.Component {
         f.push(pptsol);
         let pf = null;
         if (doRecursive) {
-          pf = recursive(pro, obj, true);
+          pf = recursive(pro, obj, true, depth + 1);
           f.push(pf);
         }
         fs.push(f);
@@ -612,7 +613,7 @@ class Main extends React.Component {
       <MathJaxContext version={3} config={config}>
         <div className="rowFlow">
           {ltx(rrssrc[ion].ltx)}
-          {recursive(ion, {})}
+          {recursive(ion, {}, false, 0)}
         </div>
       </MathJaxContext>
     );

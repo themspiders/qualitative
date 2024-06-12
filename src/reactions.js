@@ -1293,13 +1293,20 @@ const cationrrs = {
     },
   },
   '[ag(nh3)2]+': {
-    'h+': {
+    'cl-': {
       pro: 'agcl',
       ppt: true,
       sol: 'blanco',
-      rea2: 'cl-',
+      rea2: 'h+',
       pro2: 'nh4+',
       coef: {'[ag(nh3)2]+': 1, 'h+': 2, 'cl-': 1, 'agcl': 1, 'nh4+': 2},
+    },
+    'cro42-': {
+      pro: 'ag2cro4',
+      ppt: true,
+      rea2: 'h+',
+      pro2: 'nh4+',
+      coef: {'[ag(nh3)2]+': 2, 'cro42-': 1, 'h+': 4, 'ag2cro4': 1, 'nh4+': 4},
     },
   },
   //mg2+
