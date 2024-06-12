@@ -666,8 +666,8 @@ const rrssrc = {
     ltx: '{{{[Ag{(S_{2}O_{3})}_{2}]}^{3-}}_{(ac)}}',
     color: 'incoloro',
   },
-  'bacr2o72-': {
-    ltx: '{{{Ba{Cr}_{2}O_{7}}^{2-}}_{(ac)}}',
+  'bacr2o7': {
+    ltx: '{{Ba{Cr}_{2}O_{7}}_{(ac)}}',
     color: 'naranja',
   },
   'hso4-': {
@@ -1729,10 +1729,10 @@ const anionrrs = {
       coef: {'cr2o72-': 1, 'ho-': 2, 'cro42-': 2, 'h2o': 1},
     },
     'ba2+': {
-      pro: 'bacr2o72-',
+      pro: 'bacr2o7',
       ppt: false,
       sol: 'naranja',
-      coef: {'cr2o72-': 1, 'ba2+': 1, 'bacr2o72-': 1},
+      coef: {'cr2o72-': 1, 'ba2+': 1, 'bacr2o7': 1},
     },
     'h2o2': {
       pro: 'cr3+',
