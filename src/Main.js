@@ -86,7 +86,6 @@ class Main extends React.Component {
  }
 
   displaypptsol = (key, pptsol) => {
-    console.log('displaypptsol: ', key, pptsol);
     if (key && !pptsol) {
       return <div></div>;
     }
@@ -251,7 +250,6 @@ class Main extends React.Component {
     if (index > -1 && !rr["sol"]) {
       ret.splice(index, 1);
     }
-    console.log(ret);
     return (ret);
   }
 
@@ -491,9 +489,9 @@ class Main extends React.Component {
   }
   
   reaproAmount = (rr) => {
-    console.log('rA: ', rr);
+//    console.log('rA: ', rr);
     const am = ["ion", "rea", "pro", "rea2", "rea3", "pro2", "pro3"].map((x) => rr[x]);
-    console.log('suma: ', am.reduce((a, x) => a + (x ? 1 : 0), 0));
+//    console.log('suma: ', am.reduce((a, x) => a + (x ? 1 : 0), 0));
     return (am.reduce((a, x) => a + (x ? 1 : 0), 0));
   }
 

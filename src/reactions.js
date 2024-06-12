@@ -258,9 +258,12 @@ const rrssrc = {
     ltx: '{{{Fe{(CN)}_{6}}^{3-}}_{(ac)}}',
     color: 'amarillo',
   },
-  'fe[fe(cn)6]-': {
+  'kfe[fe(cn)6]': {
     ltx: '{{{Fe[Fe(CN)6]}^{-}}_{(s)}}',
     color: 'azul',
+  },
+  'k+': {
+    ltx: '{{K^{+}}_{(ac)}}',
   },
   'fe2[fe(cn)6]': {
     ltx: '{{{Fe}_{2}[Fe(CN)6]}_{(s)}}',
@@ -322,7 +325,7 @@ const rrssrc = {
     color: 'azul',
   },
   'cuo22-': {
-    ltx: '{{{CuO_{2}}^{2-}}_{(s)}}',
+    ltx: '{{{CuO_{2}}^{2-}}_{(ac)}}',
     color: 'azul',
   },
   'cuo': {
@@ -364,7 +367,7 @@ const rrssrc = {
     color: 'blanco',
   },
   'zno22-': {
-    ltx: '{{{ZnO_{2}}^{2-}}_{(s)}}',
+    ltx: '{{{ZnO_{2}}^{2-}}_{(ac)}}',
     color: 'incoloro',
   },
   '[zn(oh)4]2-': {
@@ -505,10 +508,6 @@ const rrssrc = {
   'po43-': {
     ltx: '{{{PO_{4}}^{3-}}_{(ac)}}',
     color: 'incoloro',
-  },
-  'alpo4-': {
-    ltx: '{{AlPO_{4}}_{(s)}}',
-    color: 'blanco',
   },
   'ba2+': {
     ltx: '{{{Ba}^{2+}}_{(ac)}}',
@@ -882,10 +881,11 @@ const cationrrs = {
     },
     //Turnbull's blue
     '[fe(cn)6]3-': {
-      pro: 'fe[fe(cn)6]-',
+      pro: 'kfe[fe(cn)6]',
       ppt: true,
       sol: 'azul',
-      coef: {'fe2+': 1, '[fe(cn)6]3-': 1, 'fe[fe(cn)6]-': 1},
+      rea2: 'k+',
+      coef: {'fe2+': 1, 'k+': 1, '[fe(cn)6]3-': 1, 'kfe[fe(cn)6]': 1},
     },
   },
   'fe(oh)2': {
@@ -955,10 +955,11 @@ const cationrrs = {
     },
     //Prussian blue
     '[fe(cn)6]4-': {
-      pro: 'fe[fe(cn)6]-',
+      pro: 'kfe[fe(cn)6]',
       ppt: true,
       sol: 'azul',
-      coef: {'fe3+': 1, '[fe(cn)6]4-': 1, 'fe[fe(cn)6]-': 1},
+      rea2: 'k+',
+      coef: {'fe3+': 1, 'k+': 1, '[fe(cn)6]4-': 1, 'kfe[fe(cn)6]': 1},
     },
   },
   'fe(cn)3': {
