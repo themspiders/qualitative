@@ -147,7 +147,7 @@ overflow-x: hidden;
 .rowFlow {
   display: flex;
   flex-direction: row;
-  margin-left: 2%;
+  margin-left: 1%;
   gap: 0px;
 }
 

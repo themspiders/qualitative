@@ -579,7 +579,7 @@ class Main extends React.Component {
         } else {
           f = [ltxflow(null, xtl(rea), xtl(pro), true, medium)];
         }
-        const doRecursive = (rrs[pro] && !obj[pro] && depth < 3);
+        const doRecursive = (rrs[pro] && !obj[pro] && depth < 2);
         const ppt = (rrs[x][rea].ppt ? rrssrc[rrs[x][rea].pro].color : 'noppt');
         const sol = rrs[x][rea].sol;
         const pptsol = (
