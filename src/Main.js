@@ -9,7 +9,8 @@ import { colors, nopptName, nopptColor, doColorName } from "./colors.js";
 import Button from "react-bootstrap/Button";
 import Window from "./Window.js";
 import { bottomright } from "./consts.js";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
+import { numReactions, getNumParams } from "./consts.js";
 
 const config = {
   tex: {
@@ -170,7 +171,14 @@ class Main extends React.Component {
         mjps: mjps,
         reaproAmountState: (reaction ? this.reaproAmount(rrState) : null),
       });
+      return reaction;
     }
+    return false;
+  }
+  
+  reactionSchema = () => {
+    const reaction = this.reaction();
+    this.setState({schema: reaction});
   }
 
   getRandomFrom = (arr, x) => {
@@ -317,8 +325,8 @@ class Main extends React.Component {
     });
 
     const rrparams = this.getParams(chosenrr);
-    const numParams = Math.floor(rrparams.length/2) + 1; //(allParams.length/2 % 2);
-    const selectedParams = this.getRandomSubArr(rrparams, numParams);
+    const numParams = getNumParams(rrparams);
+    const selectedParams = this.getRandomSubArr(rrparams,numParams);
 //    console.log('subarr: ', selectedParams);
     const canSelect = {};
     allParams.forEach((x) => {
@@ -341,7 +349,7 @@ class Main extends React.Component {
     return [ions, irea, irea2, irea3, ipro, ipro2, ipro3, chosenrr, canSelect, pptcolor, pptname, solcolor, solname];
   }
 
-  getNewState = (reset, numReactions = 11) => {
+  getNewState = (reset) => {
     const [ions, reas, rea2s, rea3s, pros, pro2s, pro3s, chosenrr, canSelect, pptcolor, pptname, solcolor, solname] = this.getAll2(numReactions);
     //la decision es: si hay algun reactivo o producto preseleccionado que identifique una reaccion de amoniaco
     //entonces todos los repros estan visibles por defecto.
@@ -369,8 +377,8 @@ class Main extends React.Component {
       ...params,
       reaction: false,
       rrcount: 0,
-      mjrr: null,
-      mjps: null,
+//      mjrr: null,
+//      mjps: null,
       ions: ions,
       irea: reas,
       irea2: rea2s,
@@ -386,7 +394,7 @@ class Main extends React.Component {
       ppt: pptname,
       sol: solname,
       reaproAmount: this.reaproAmount(chosenrr),
-      reaproAmountState: null,
+//      reaproAmountState: null,
       mainScreen: true,
       flowsToggle: false,
     };
@@ -764,13 +772,13 @@ class Main extends React.Component {
         <div className="rrButton">
           <RWindow
             name={'Reacción'}
-            onClick={() => this.reaction()}
-            secondary={() => (true || !this.state.reaction)}
-            title={() => (this.state.reaction)}
+            onClick={() => this.reactionSchema()}
+            secondary={() => (true || !this.state.schema)}
+            title={() => (this.state.schema)}
             callback={() => this.reset()}
             mjrr={() => (this.state.mjrr)}
             mjps={() => (this.state.mjps)}
-            schema={() => (this.state.reaction)}
+            schema={() => (this.state.schema)}
             size={() => (this.state.reaproAmountState && this.state.reaproAmountState > 3)}
           />
         </div>

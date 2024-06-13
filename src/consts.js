@@ -17,3 +17,11 @@ export const initText = "\
 ;
 
 export const bottomright = 'by initramfs';
+
+export const numReactions = 11;
+
+export const getNumParams = (rrparams) => {
+//  return 20;
+  return Math.floor(rrparams.length/2) + 1;
+}
+

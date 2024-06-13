@@ -12,8 +12,8 @@ function Window(props) {
   }
   
   const onClickPrimary = () => {
-    props.callback();
     setShow(false);
+    props.callback();
   }
 
   return (
