@@ -779,7 +779,7 @@ class Main extends React.Component {
             mjrr={() => (this.state.mjrr)}
             mjps={() => (this.state.mjps)}
             schema={() => (this.state.schema)}
-            size={() => (this.state.reaproAmountState && this.state.reaproAmountState > 3)}
+            size={() => (this.state.schema && this.state.reaproAmountState && this.state.reaproAmountState > 3)}
           />
         </div>
       );
