@@ -576,7 +576,6 @@ class Main extends React.Component {
     };
     const recursive = (x, obj, second = false, depth) => {
       obj[x] = true;
-      console.log('x: ', x, second);
       const fs = [];
       for (let rea in rrs[x]) {
         const pro = rrs[x][rea].pro;
@@ -628,7 +627,6 @@ class Main extends React.Component {
   }
   
   makeAllFlows = (toggle) => {
-    console.log('makeAllFlows');
     const cationflows = Object.keys(cationrrs).map((x) => this.makeFlow(x));
     const anionflows = Object.keys(anionrrs).map((x) => this.makeFlow(x));
     this.setState({allFlows: {cations: cationflows, anions: anionflows}});
@@ -641,7 +639,6 @@ class Main extends React.Component {
         ? this.state.allFlows[!this.state.flowsToggle ? "cations" : "anions"]
         : this.makeAllFlows(this.state.flowsToggle)
     );
-    console.log('allFlows: ', allFlows);
     return (
       <div>
         <div className="flowsButtons2">
