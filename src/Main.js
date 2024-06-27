@@ -27,13 +27,18 @@ class Main extends React.Component {
   render() {
     return (
       (this.state.analysis === null ?
-        <div className="center">
-          <Button onClick={() => this.setReactions()}>
-            {'Reacciones'}
-          </Button>
-          <Button onClick={() => this.setAnalysis()}>
-            {'Analisis'}
-          </Button>
+        <div>
+          <div className="center">
+            <Button onClick={() => this.setReactions()}>
+              {'Reacciones'}
+            </Button>
+            <Button onClick={() => this.setAnalysis()}>
+              {'Analisis'}
+            </Button>
+          </div>
+          <div className="bottomright">
+            {bottomright}
+          </div>
         </div>
       : (this.state.analysis === true
         ? <Analysis

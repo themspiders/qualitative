@@ -811,9 +811,6 @@ class Reactions extends React.Component {
           {rrButton()}
         </div>
         </MathJaxContext>
-        <div className="bottomright">
-          {bottomright}
-        </div>
       </div>
     :
       <div>

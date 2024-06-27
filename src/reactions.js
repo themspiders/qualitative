@@ -681,7 +681,23 @@ const rrssrc = {
   },
   'h2so4conc': {
     ltx: '{{H_{2}SO_{4}}_{(conc)}}',
-    colot: 'incoloro',
+    color: 'incoloro',
+  },
+  'naoh': {
+    ltx: '{{NaOH}_{(ac)}}',
+    color: 'incoloro',
+  },
+  'naohexc': {
+    ltx: '{\\uparrow{{NaOH}_{(ac)}}}',
+    color: 'incoloro',
+  },
+  'naohconc': {
+    ltx: '{{NaOH}_{(conc)}}',
+    color: 'incoloro',
+  },
+  'nh3conc': {
+    ltx: '{{NH_{3}}_{(conc)}}',
+    color: 'incoloro',
   },
 };
 
@@ -2091,6 +2107,7 @@ const analyses = [
     answer: ['aso43-', 'po43-'],
   },
 */
+//
   {
     set: ['cr2o72-', 'cl-', 'so32-', 'i-', 'aso43-', 'po43-', 'mno4-', 'i3-'],
     question: ['Solucion incolora'],
@@ -2110,6 +2127,27 @@ const analyses = [
     set: ['so32-', 'i-'],
     question: ['Agregado de', 'h2o2', '/', 'h2so4conc', 'hay reacción y da positivo con almidón'],
     answer: ['so32-'],
+  },
+//
+  {
+    set: ['mg2+', 'ba2+', 'al3+', 'pb2+', 'cr3+', 'fe3+', 'ni2+', 'cu2+', 'ag+'],
+    question: ['Solucion coloreada'],
+    answer: [],
+  },
+  {
+    set: ['mg2+', 'ba2+', 'al3+', 'pb2+', 'cr3+', 'fe3+', 'ni2+', 'cu2+', 'ag+'],
+    question: ['El agregado de', 'naoh', '0.1M produce precipitado que se re-disuelve con', 'naohexc', 'concentrado'],
+    answer: ['mg2+', 'fe3+', 'ni2+', 'cu2+', 'ag+'],
+  },
+  {
+    set: ['ba2+', 'al3+', 'pb2+', 'cr3+'],
+    question: ['El agregado de', 'nh3', 'produce un precipitado que re-disuelve con', 'nh3', 'concentrado'],
+    answer: ['al3+', 'pb2+'],
+  },
+  {
+    set: ['ba2+', 'cr3+'],
+    question: ['El agregado de', 'naohexc', '0.1M y', 'h2o2', 'produce un ppt coloreado que solo re-disuelve cuando baja el pH'],
+    answer: [],
   },
 ]; 
 
