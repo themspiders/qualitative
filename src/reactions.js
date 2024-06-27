@@ -346,7 +346,7 @@ const rrssrc = {
   },
   'i2': {
     ltx: '{{I_{2}}_{(l)}}',
-    color: null,
+    color: 'negro',
   },
   '[cu(dmg)2]2+': {
     ltx: '{{{[Cu{(DMG)}_{2}]}^{2+}}_{(ac)}}',
@@ -697,6 +697,10 @@ const rrssrc = {
   },
   'nh3conc': {
     ltx: '{{NH_{3}}_{(conc)}}',
+    color: 'incoloro',
+  },
+  'h2so4': {
+    ltx: '{{H_{2}SO_{4}}_{(ac)}}',
     color: 'incoloro',
   },
 };
@@ -2085,29 +2089,7 @@ const anionrrs = {
 };
 
 const analyses = [
-/*
-  {
-    set: ['cro42-', 's2o32-', 'aso43-', 'po43-', 'i3-',],
-    question: ['Solucion coloreada'],
-    answer: [],
-  },
-  {
-    set: ['cro42-', 's2o32-', 'aso43-', 'po43-', 'i3-',],
-    question: ['El agregado de', 'h2so4', 'produce una reacción'],
-    answer: ['aso43-', 'po43-'],
-  },
-  {
-    set: ['cro42-', 's2o32-', 'i3-',],
-    question: ['Se agrega', 'mgcl2/(nh4)cl', 'sin que se observen cambios'],
-    answer: ['aso43-', 'po43-'],
-  },
-  {
-    set: ['s2o32-', 'i3-',],
-    question: ['El agregado de', 'i2', 'produce una reacción'],
-    answer: ['aso43-', 'po43-'],
-  },
-*/
-//
+
 /////////////////////////////////////////////////////////////////////////////////////////////
   {
     set: ['cr2o72-', 'cl-', 'so32-', 'i-', 'aso43-', 'po43-', 'mno4-', 'i3-'],
@@ -2170,6 +2152,26 @@ const analyses = [
     set: ['no3-', 'i-'],
     question: ['Agregado de', 'i2', 'produce una solucion coloreada'],
     answer: ['no3-'],
+  },
+  {
+    set: ['cro42-', 's2o32-', 'aso43-', 'po43-', 'i3-',],
+    question: ['Solucion coloreada'],
+    answer: [],
+  },
+  {
+    set: ['cro42-', 's2o32-', 'aso43-', 'po43-', 'i3-',],
+    question: ['El agregado de', 'h2so4', 'produce una reacción'],
+    answer: ['i3-'],
+  },
+  {
+    set: ['cro42-', 's2o32-', 'aso43-', 'po43-'],
+    question: ['Se agrega', 'mgcl2/(nh4)cl', 'sin que se observen cambios'],
+    answer: ['aso43-', 'po43-'],
+  },
+  {
+    set: ['cro42-', 's2o32-'],
+    question: ['El agregado de', 'i2', 'produce una reacción'],
+    answer: ['cro42-'],
   },
 ]; 
 
