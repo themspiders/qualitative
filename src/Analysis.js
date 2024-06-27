@@ -144,7 +144,7 @@ class Analysis extends React.Component {
         (this.state.aly ?
           <div className="analysis">
             <div className="simplerow">
-              {"La solución puede contener: "}
+              {"La solucion puede contener: "}
               {this.makeSet(this.state.aly.set)}
             </div>
             {this.makeQuestion(this.state.aly.question)}

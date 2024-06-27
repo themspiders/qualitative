@@ -2129,7 +2129,7 @@ const analyses = [
   },
   {
     set: ['ba2+', 'cr3+'],
-    question: ['El agregado de', 'naohexc', '0.1M y', 'h2o2', 'produce un ppt coloreado que solo re-disuelve cuando baja el pH'],
+    question: ['El agregado de', 'naoh', '0.1M y', 'h2o2', 'produce un ppt coloreado que solo re-disuelve cuando baja el pH'],
     answer: [],
   },
 //
@@ -2173,6 +2173,25 @@ const analyses = [
     question: ['El agregado de', 'i2', 'produce una reacción'],
     answer: ['cro42-'],
   },
+
+/*
+  {
+    set: ['mg2+', 'pb2´', 'cr3+', 'fe3+', 'ni2+', 'co2+', 'ag+', 'zn2+'],
+    question: ['Solucion incolora'],
+    answer: ['cr3+', 'fe3+', 'ni2+', 'co2+'],
+  },
+  {
+    set: ['mg2+', 'pb2´', 'ag+', 'zn2+'],
+    question: ['El agregado de', 'naoh', 'diluido produce un precipitado que re-disuelve parcialmente con', 'naohconc'],
+    answer: ['ag+', 'mg2+'],
+  },
+  {
+    set: ['pb2´', 'zn2+'],
+    question: ['El agregado de', 'nh3', 'produce un precipitado que re-disuelve con', 'nh3conc'],
+    answer: ['ag+', 'mg2+'],
+  },
+  {
+*/
 ]; 
 
 const rrs = {
