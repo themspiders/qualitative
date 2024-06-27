@@ -23,5 +23,21 @@ export const numReactions = 11;
 export const getNumParams = (rrparams) => {
 //  return 20;
   return (Math.floor(rrparams.length/2) + 1);
-}
+};
+
+export const mathJaxConfig = {
+  tex: {
+    loader: { load: ['[tex]/html'] },
+    packages: { '[+]': ['html'] },
+    inlineMath: [
+      ['$', '$'],
+      ['\\(', '\\)']
+    ],
+    displayMath: [
+      ['$$', '$$'],
+      ['\\[', '\\]']
+    ]
+  }
+};
+
 

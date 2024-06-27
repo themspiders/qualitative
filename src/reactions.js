@@ -674,6 +674,15 @@ const rrssrc = {
     ltx: '{{{HSO_{4}}^{-}}_{(ac)}}',
     color: 'incoloro'
   },
+  //analysis
+  'mgcl2/(nh4)cl': {
+    ltx: '{Mg{Cl}_{2}/(NH_{4})Cl}',
+    color: 'incoloro',
+  },
+  'h2so4conc': {
+    ltx: '{{H_{2}SO_{4}}_{(conc)}}',
+    colot: 'incoloro',
+  },
 };
 
 const cationrrs = {
@@ -2059,11 +2068,54 @@ const anionrrs = {
   },
 };
 
-
+const analyses = [
+/*
+  {
+    set: ['cro42-', 's2o32-', 'aso43-', 'po43-', 'i3-',],
+    question: ['Solucion coloreada'],
+    answer: [],
+  },
+  {
+    set: ['cro42-', 's2o32-', 'aso43-', 'po43-', 'i3-',],
+    question: ['El agregado de', 'h2so4', 'produce una reacción'],
+    answer: ['aso43-', 'po43-'],
+  },
+  {
+    set: ['cro42-', 's2o32-', 'i3-',],
+    question: ['Se agrega', 'mgcl2/(nh4)cl', 'sin que se observen cambios'],
+    answer: ['aso43-', 'po43-'],
+  },
+  {
+    set: ['s2o32-', 'i3-',],
+    question: ['El agregado de', 'i2', 'produce una reacción'],
+    answer: ['aso43-', 'po43-'],
+  },
+*/
+  {
+    set: ['cr2o72-', 'cl-', 'so32-', 'i-', 'aso43-', 'po43-', 'mno4-', 'i3-'],
+    question: ['Solucion incolora'],
+    answer: ['cr2o72-', 'mno4-', 'i3-'],
+  },
+  {
+    set: ['cl-', 'so32-', 'i-', 'aso43-', 'po43-'],
+    question: ['Se agrega', 'mgcl2/(nh4)cl', 'sin que se observen cambios'],
+    answer: ['aso43-', 'po43-'],
+  },
+  {
+    set: ['cl-', 'so32-', 'i-'],
+    question: ['El agregado de', 'agno3', 'produce un precipitado que NO re-disuelve con', 'nh3'],
+    answer: ['cl-'],
+  },
+  {
+    set: ['so32-', 'i-'],
+    question: ['Agregado de', 'h2o2', '/', 'h2so4conc', 'hay reacción y da positivo con almidón'],
+    answer: ['so32-'],
+  },
+]; 
 
 const rrs = {
   ...cationrrs,
   ...anionrrs,
 }
 
-export { rrssrc, cationrrs, anionrrs, rrs };
+export { rrssrc, cationrrs, anionrrs, rrs, analyses };

@@ -355,4 +355,35 @@ overflow-x: hidden;
   color: #2c5777;
 }
 
+.allanalysis {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.analysis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.simplerow {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.react-dropdown-select-option {
+      background: white !important;
+      color: black !important;
+}
+
+
+
+
 
