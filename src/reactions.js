@@ -2108,6 +2108,7 @@ const analyses = [
   },
 */
 //
+/////////////////////////////////////////////////////////////////////////////////////////////
   {
     set: ['cr2o72-', 'cl-', 'so32-', 'i-', 'aso43-', 'po43-', 'mno4-', 'i3-'],
     question: ['Solucion incolora'],
@@ -2148,6 +2149,27 @@ const analyses = [
     set: ['ba2+', 'cr3+'],
     question: ['El agregado de', 'naohexc', '0.1M y', 'h2o2', 'produce un ppt coloreado que solo re-disuelve cuando baja el pH'],
     answer: [],
+  },
+//
+  {
+    set: ['cr2o72-', 'cl-', 'no3-', 'i-', 'aso43-', 'po43-', 'mno4-', 'i3-'],
+    question: ['Solucion incolora'],
+    answer: ['cr2o72-', 'mno4-', 'i3-'],
+  },
+  {
+    set: ['cl-', 'no3-', 'i-', 'aso43-', 'po43-'],
+    question: ['Se agrega', 'mgcl2/(nh4)cl', 'sin que se observen cambios'],
+    answer: ['aso43-', 'po43-'],
+  },
+  {
+    set: ['cl-', 'no3-', 'i-'],
+    question: ['El agregado de', 'agno3', 'produce un precipitado que NO re-disuelve con', 'nh3'],
+    answer: ['cl-'],
+  },
+  {
+    set: ['no3-', 'i-'],
+    question: ['Agregado de', 'i2', 'produce una solucion coloreada'],
+    answer: ['no3-'],
   },
 ]; 
 

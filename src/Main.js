@@ -33,7 +33,7 @@ class Main extends React.Component {
               {'Reacciones'}
             </Button>
             <Button onClick={() => this.setAnalysis()}>
-              {'Analisis'}
+              {'Análisis'}
             </Button>
           </div>
           <div className="bottomright">
