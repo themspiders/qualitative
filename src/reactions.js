@@ -635,7 +635,7 @@ const rrssrc = {
     color: 'incoloro',
   },
   'hso3-': {
-    ltx: '{{{HSO_{4}}^{-}}_{(ac)}}',
+    ltx: '{{{HSO_{3}}^{-}}_{(ac)}}',
     color: 'incoloro',
   },
   'ag2so3': {
