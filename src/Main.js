@@ -35,6 +35,9 @@ class Main extends React.Component {
             <Button onClick={() => this.setAnalysis()}>
               {'Análisis'}
             </Button>
+            <Button onClick={() => {}} disabled={true} variant="dark">
+              {'Orgánica'}
+            </Button>
           </div>
           <div className="bottomright">
             {bottomright}
