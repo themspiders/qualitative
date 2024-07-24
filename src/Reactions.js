@@ -1,7 +1,7 @@
 import "./Main.css";
 import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
-import { rrssrc, cationrrs, anionrrs, rrs } from "./reactions.js";
+import { rrssrc, cationrrs, anionrrs, rrs } from "./allinfo/allinfo.js";
 import Reapro from "./Reapro.js";
 import RWindow from "./RWindow.js";
 import ColorPicker from "./ColorPicker.js";

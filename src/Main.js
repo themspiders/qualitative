@@ -7,35 +7,33 @@ import Window from "./Window.js";
 import { bottomright } from "./consts.js";
 import Reactions from "./Reactions.js";
 import Analysis from "./Analysis.js";
+import Organics from "./Organics.js";
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      analysis: null,
+//      screen: null,
+      screen: null,
     };
   }
 
-  setReactions = () => {
-    this.setState({analysis: false});
-  }
-
-  setAnalysis = () => {
-    this.setState({analysis: true});
-  }
+  setScreen = (screen) => {
+    this.setState({screen: screen});
+ }
 
   render() {
     return (
-      (this.state.analysis === null ?
+      (this.state.screen === null ?
         <div>
           <div className="center">
-            <Button onClick={() => this.setReactions()}>
+            <Button onClick={() => this.setScreen('reactions')}>
               {'Reacciones'}
             </Button>
-            <Button onClick={() => this.setAnalysis()}>
+            <Button onClick={() => this.setScreen('analysis')}>
               {'Análisis'}
             </Button>
-            <Button onClick={() => {}} disabled={true} variant="dark">
+            <Button onClick={() => this.setScreen('organics')} disabled={true} variant="dark">
               {'Orgánica'}
             </Button>
           </div>
@@ -43,16 +41,19 @@ class Main extends React.Component {
             {bottomright}
           </div>
         </div>
-      : (this.state.analysis === true
+      : (this.state.screen === 'analysis'
         ? <Analysis
           />
-        : <Reactions
-          />
+        : (this.state.screen === 'reactions'
+          ? <Reactions
+            />
+          : <Organics
+            />
+          )
         )
       )
     );
   }
 }
-
 
 export default Main;

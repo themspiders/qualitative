@@ -8,10 +8,14 @@ import Button from "react-bootstrap/Button";
 import Window from "./Window.js";
 import { bottomright, mathJaxConfig } from "./consts.js";
 import { numReactions, getNumParams } from "./consts.js";
-import { rrssrc, cationrrs, anionrrs, rrs, analyses } from "./allinfo/allinfo.js";
+import { rrssrc, cationrrs, anionrrs, rrs, analyses, orgsrc, orgrrs } from "./allinfo/allinfo.js";
 import AWindow from "./AWindow.js";
+import { Kekule } from 'kekule';
+// if Kekule widgets is used, the theme CSS should be imported as well
+import 'kekule/theme/default';
+console.log(Kekule.VERSION);
 
-class Analysis extends React.Component {
+class Organics extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.getInitialState();
@@ -22,17 +26,17 @@ class Analysis extends React.Component {
   }
 
   getNewState = (initial = false) => {
-    const allalys = analyses.slice();
-    if (!initial && this.state.aly) {
-      const index = allalys.indexOf(this.state.aly);
+    const allrrs = orgrrs.slice();
+    if (!initial && this.state.rr) {
+      const index = allrrs.indexOf(this.state.rr);
       if (index > -1) {
-        allalys.splice(index, 1);
+        allrrs.splice(index, 1);
       }
     }
-    const aly = this.getRandomFrom(allalys);
-    console.log('answer: ', aly.answer);
+    const rr = this.getRandomFrom(allrrs);
+    console.log('reaction: ', rr);
     return ({
-      aly: aly,
+      rr: rr,
       selected: [],
     });
   }
@@ -90,12 +94,12 @@ class Analysis extends React.Component {
   }
 
   setAnswer = (selected) => {
-    console.log('setAnswer: ', selected);
     this.setState({selected: selected});
   }
 
   reapro = (set, callback) => {
-    const options = set.map((x) => ({value: x, label: this.ltx(rrssrc[x].ltx)}));
+//    const options = set.map((x) => ({value: x, label: this.ltx(rrssrc[x].ltx)}));
+    const options = set.map((x) => ({value: x, label: x}));
 //    options.push({value: 'ninguno', label: 'Ninguno'});
     return (
       <Select
@@ -103,9 +107,9 @@ class Analysis extends React.Component {
         options={options}
         onChange={(selected) => callback(selected.map((x) => x.value))}
 //        values={value ? [value] : []}
-        placeholder={"Ninguno"}
+        placeholder={"Seleccionar"}
         searchable={false}
-        multi={true}
+        multi={false}
       />
     );
   }
@@ -138,47 +142,53 @@ class Analysis extends React.Component {
     this.setState({schema: analysis});
   }
 
+  test = () => {
+    var chemViewer = new Kekule.ChemWidget.Viewer(document);
+    chemViewer
+      .setEnableToolbar(false)
+      .setEnableDirectInteraction(false)
+      .setEnableEdit(false)
+      .setToolButtons([])
+      .setPredefinedSetting('static');
+    chemViewer.setDimension('50px', '50px');
+    
+//    document.getElementById("x1").setAttribute = chemViewer;
+    const elem = React.createElement(
+    "div",
+    {style:{color:"red"}, id: 'idmol'},
+    "hello",
+    );
+//    chemViewer.appendToElem(document.getElementById('idmol')).setChemObj(orgsrc);
+    chemViewer.appendToElem(elem).setChemObj(orgsrc);
+    this.setState({chvw: elem});
+    console.log('elem: ', elem);
+    return elem;
+  }
+  
+//              {this.reapro([<div id='x1'>x</div>, 'xx'], this.setAnswer)}
   render() {
-    const analysis = () => {
+    const reapro = () => {
       return (
-        (this.state.aly ?
+        (true ?
           <div className="analysis">
-            <div className="simplerow">
-              {"La solucion puede contener: "}
-              {this.makeSet(this.state.aly.set)}
-            </div>
-            {this.makeQuestion(this.state.aly.question)}
-            <div className="simplerow">
-              {"Se descartan: "}
-              {this.reapro(this.state.aly.set, this.setAnswer)}
-            </div>
+            {this.reapro([this.state.chvw ? this.state.chvw : 'ss1', 'ss2'], this.setAnswer)}
           </div>
         : null)
       );
     }
-    const alyButton = () => {
-      return (
-        <div className="rrButton">
-          <AWindow
-            name={'Verificar'}
-            onClick={() => this.analysisSchema()}
-            secondary={() => (true || !this.state.schema)}
-            title={() => (this.state.schema)}
-            callback={() => this.reset()}
-            schema={() => (this.state.schema)}
-          />
-        </div>
-      );
+    const debug = () => {
+      return <Button onClick={() => this.test()}>debug</Button>
     }
-      
+//              {this.test()}
     return (
       <div>
         <MathJaxContext version={3} config={mathJaxConfig}>
           <div className="center">
             <div className="allanalysis">
-              {analysis()}
+              <div id='id2'>id2</div>;
+              {reapro()}
             </div>
-            {alyButton()}
+            {debug()}
           </div>
         </MathJaxContext>
         {this.debugButtons()}
@@ -190,4 +200,4 @@ class Analysis extends React.Component {
 }
 
 
-export default Analysis;
+export default Organics;
