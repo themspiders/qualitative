@@ -12,7 +12,7 @@ export const initText1 = "\
 ;
 
 export const initText = "\
-  \For Naiara.\
+  \Fuck.\
   "
 ;
 
