@@ -1,20 +1,21 @@
-export const initTitle = "El juego de mesa";
+export const initTitle = "My Chemical Wizardry";
 
-export const initText1 = "\
-    El juego selecciona una reacción arbitraria de todas las que hay, pero no la muestra completamente.\
-    Algunos reactivos o productos o colores (como por ser el de precipitado o solución) de la reacción elegida\
-    también ya se preseleccionan arbitrariamente,\
-    y la idea es elegir las demás cosas que faltan para completarla. En caso de rendirse, apretar el botón \"reset\"\
-    para avanzar a otra reacción. Para que la aplicación se visualice bien, es\
-    mejor abrirla desde la computadora o sino con el celular pero con la pantalla de costado. Está en construcción y pueden surgir errores.\
-    \"debug\" es solo un botón para ver qué puede suceder en caso de surgir algún error.\
-  "
-;
-
+/*
 export const initText = "\
-  \Fuck.\
+  \{<a href="#" aria-hidden="true"></a>}\
   "
 ;
+*/
+
+const redirect = () => {
+  window.location.replace('https://hechiceriaquimica.web.app');
+}
+
+export const initText = <a href="#" onClick={() => redirect()}>https://hechiceriaquimica.web.app/</a>;
+
+/*
+//<a href="#" onClick={() => this.setState({infoWindow: true})}>info</a>
+*/
 
 export const bottomright = 'by initramfs';
 

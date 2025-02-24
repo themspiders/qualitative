@@ -24,6 +24,7 @@ class Main extends React.Component {
 
   render() {
     return (
+      (false ?
       (this.state.screen === null ?
         <div>
           <div className="center">
@@ -52,6 +53,7 @@ class Main extends React.Component {
           )
         )
       )
+      : null)
     );
   }
 }

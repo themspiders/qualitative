@@ -34,10 +34,11 @@ function Window(props) {
           <Modal.Body>
             {props.body}
           </Modal.Body>
-        <Modal.Footer class="modal-footer justify-content-between">
-            {props.footer}
-          <Button variant="primary" onClick={onClickPrimary}>Cerrar</Button>
-        </Modal.Footer>
+        {props.footer ?
+          <Modal.Footer class="modal-footer justify-content-between">
+            <Button variant="primary" onClick={onClickPrimary}>Cerrar</Button>
+          </Modal.Footer>
+        : null}
       </Modal>
     </>
   );

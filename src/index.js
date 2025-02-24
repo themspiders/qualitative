@@ -12,11 +12,13 @@ root.render(
   <React.StrictMode>
     {true ?
       <Window
+        title={initTitle}
         callback={() => {}}
 //        title={initTitle}
         body={initText}
         clickable={false}
         show={true}
+        footer={false}
       >
       </Window>
     : null}
